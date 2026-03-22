@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Syne", sans-serif;
+  --font-body: "Manrope", sans-serif;
+
+  --color-background: #13131b;
+  --color-surface: #13131b;
+  --color-surface-container: #1f1f27;
+  --color-surface-container-low: #1b1b23;
+  --color-surface-container-lowest: #0d0d16;
+  --color-surface-container-high: #292932;
+  --color-surface-container-highest: #34343d;
+  
+  --color-primary: #57f1db;
+  --color-primary-container: #2dd4bf;
+  --color-on-primary: #003731;
+  --color-on-primary-container: #00574d;
+  
+  --color-secondary: #ffb4a1;
+  --color-secondary-container: #7f301b;
+  
+  --color-tertiary: #d7d6ff;
+  --color-tertiary-fixed-dim: #c0c1ff;
+
+  --color-on-surface: #e4e1ed;
+  --color-on-surface-variant: #bacac5;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden;
+  }
+}
+
+.hero-gradient {
+  background: linear-gradient(to bottom, transparent 0%, rgba(19, 19, 27, 0.4) 60%, rgba(13, 13, 22, 1) 100%);
+}
+
+.bento-card-gradient {
+  background: linear-gradient(to top, rgba(13, 13, 22, 0.9) 0%, rgba(13, 13, 22, 0.4) 50%, transparent 100%);
+}
+
+.ambient-glow {
+  filter: blur(80px);
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.glass-obsidian {
+  background: rgba(31, 31, 39, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.grain-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+@keyframes ken-burns {
+  0% { transform: scale(1.0); }
+  100% { transform: scale(1.08); }
+}
+
+.hero-ken-burns {
+  animation: ken-burns 30s ease-in-out infinite alternate;
+}
