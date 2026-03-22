@@ -1,45 +1,131 @@
+import { Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'motion/react';
+import type { MotionValue } from 'motion/react';
+import { useScroll, useTransform, motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { siteImages } from '../lib/images';
-import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
+import { sectionReveal } from '../lib/motion';
+
+const MANIFESTO_TEXT =
+  'We build worlds. We score futures. We dream where everyone can see.';
+
+function WordReveal({ text, className }: { text: string; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 0.8', 'end 0.4'],
+  });
+  const words = text.split(' ');
+
+  return (
+    <span ref={ref} className={className}>
+      {words.map((word, i) => {
+        const start = i / words.length;
+        const end = (i + 1) / words.length;
+        return (
+          <Fragment key={`${i}-${word}`}>
+            <WordUnit word={word} progress={scrollYProgress} range={[start, end]} />
+            {word === 'futures.' ? <br className="hidden md:block" /> : null}
+          </Fragment>
+        );
+      })}
+    </span>
+  );
+}
+
+function WordUnit({
+  word,
+  progress,
+  range,
+}: {
+  word: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+}) {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  const isEveryone = word === 'everyone';
+  return (
+    <motion.span
+      style={{ opacity }}
+      className={`inline-block mr-[0.25em]${isEveryone ? ' text-primary italic' : ''}`}
+    >
+      {word}
+    </motion.span>
+  );
+}
 
 export default function Home() {
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const headlineY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 24,
+      rotate: -0.5,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotate: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
+    },
+  };
 
   return (
     <motion.div
+      data-page="home"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="relative"
     >
-      <header className="relative min-h-screen flex flex-col justify-end items-start px-8 md:px-24 pb-24 overflow-hidden">
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroY, opacity: heroOpacity }}>
-            <img
-              src={siteImages.heroBackground}
-              alt=""
-              aria-hidden
-              className="hero-ken-burns absolute inset-0 z-0 h-full w-full object-cover"
-            />
-            <video
-              className="absolute inset-0 z-[1] h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster={siteImages.heroBackground}
-              aria-hidden
-            >
-              <source src={siteImages.heroVideo} type="video/mp4" />
-            </video>
-          </motion.div>
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex flex-col justify-end items-start overflow-hidden px-8 md:px-24 pb-24"
+      >
+        <motion.div style={{ y: bgY }} className="absolute inset-0 -top-[30%] -bottom-[30%]">
+          <img
+            src={siteImages.heroBackground}
+            alt=""
+            aria-hidden
+            className="hero-ken-burns absolute inset-0 z-0 h-full w-full object-cover"
+          />
+          <video
+            className="absolute inset-0 z-[1] h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={siteImages.heroBackground}
+            aria-hidden
+          >
+            <source src={siteImages.heroVideo} type="video/mp4" />
+          </video>
           <div className="absolute inset-0 hero-gradient pointer-events-none" />
-        </div>
-        <div className="relative z-10 max-w-5xl">
+        </motion.div>
+
+        <motion.div style={{ y: headlineY, opacity: contentOpacity }} className="relative z-10 max-w-5xl">
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-on-surface-variant font-headline font-bold uppercase tracking-[0.3em] text-sm md:text-base">Marc Joy Media</span>
             <span className="text-on-surface-variant font-body font-medium uppercase tracking-widest text-xs opacity-60">Afrofuturist Multimedia Studio / Seattle</span>
@@ -54,8 +140,8 @@ export default function Home() {
             Enter the World
             <ArrowRight className="group-hover:translate-x-2 transition-transform" />
           </Link>
-        </div>
-      </header>
+        </motion.div>
+      </section>
 
       <motion.section
         className="py-[120px] px-8 flex justify-center items-center bg-surface-container-lowest"
@@ -66,7 +152,9 @@ export default function Home() {
       >
         <div className="max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl lg:text-[2.5rem] font-bold font-headline leading-tight text-on-surface tracking-tight">
-            "We build worlds. We score futures. <br className="hidden md:block"/> We dream where <span className="text-primary italic">everyone</span> can see."
+            &ldquo;
+            <WordReveal text={MANIFESTO_TEXT} />
+            &rdquo;
           </h2>
         </div>
       </motion.section>
@@ -88,13 +176,13 @@ export default function Home() {
           </p>
         </div>
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-12 gap-6 min-h-[1200px]"
-          variants={staggerContainerVariants}
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={staggerViewport}
+          viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 min-h-[1200px]"
         >
-          <motion.div variants={staggerCardVariants} className="md:col-span-8 relative rounded-xl overflow-hidden group">
+          <motion.div variants={cardVariants} className="md:col-span-8 relative rounded-xl overflow-hidden group">
             <img src={siteImages.propertyKemetopolis} alt="Kemetopolis" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-10 flex flex-col items-start w-full">
@@ -106,7 +194,7 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
-          <motion.div variants={staggerCardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
+          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
             <img src={siteImages.propertyMarsAcademy} alt="Mars Academy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">
@@ -118,7 +206,7 @@ export default function Home() {
               </button>
             </div>
           </motion.div>
-          <motion.div variants={staggerCardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
+          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
             <img src={siteImages.propertyNeverOneMonth} alt="NeverOneMonth" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">
@@ -130,7 +218,7 @@ export default function Home() {
               </button>
             </div>
           </motion.div>
-          <motion.div variants={staggerCardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
+          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
             <img src={siteImages.propertyScatteredThrones} alt="Scattered Thrones" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">
@@ -142,7 +230,7 @@ export default function Home() {
               </button>
             </div>
           </motion.div>
-          <motion.div variants={staggerCardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
+          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
             <img src={siteImages.propertyNWBP} alt="NW Black Pioneers" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">

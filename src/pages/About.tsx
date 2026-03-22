@@ -6,6 +6,7 @@ import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerVi
 export default function About() {
   return (
     <motion.div
+      data-page="about"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

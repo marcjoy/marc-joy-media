@@ -1,5 +1,6 @@
-import { motion } from 'motion/react';
-import { siteImages } from '../lib/images';
+import { useEffect, useRef, useState } from 'react';
+import { useScroll, useTransform, useMotionTemplate, motion } from 'motion/react';
+import { images, siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
 /** Phase 2A Cosmic Kids canon. Portraits from R2 via siteImages. */
@@ -12,29 +13,126 @@ const cosmicKids = [
   { name: 'Anyanwu Ama', role: 'Sun Keeper / Flame of Sekhmet', img: siteImages.charAnyanwuAma },
 ];
 
+const COSMIC_KIDS_8BIT_INDEX = cosmicKids.findIndex((c) => c.name === '8Bit');
+
+const kemetopolisHeroOrbit = images.world.scene1226;
+const kemetopolisHeroDetail = images.world.scene1020;
+
+/* Placeholders: images.ts has no dedicated Calibrated / Drift Collective art — swap when faction renders exist. */
+const factionImageDriftCollective = images.world.microScaleAction;
+const factionImageCalibrated = images.world.microScaleLearning;
+
+const cardVariants = (index: number) => ({
+  hidden: {
+    opacity: 0,
+    x: index % 2 === 1 ? -60 : 60,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      delay: (index % 3) * 0.1,
+    },
+  },
+});
+
+const NTU_NAME_GLOW: Record<string, string> = {
+  Kofi: '#F5F0E8',
+  Mjenzi: '#2DD4BF',
+  '8Bit': '#EF4444',
+  Soliloquy: '#6366F1',
+  Zamani: '#D4A574',
+  'Anyanwu Ama': '#E07A5F',
+};
+
 export default function Kemetopolis() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [eightBitGlowGreen, setEightBitGlowGreen] = useState(false);
+  const heroRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (hoveredCard !== COSMIC_KIDS_8BIT_INDEX) {
+      setEightBitGlowGreen(false);
+      return;
+    }
+    const id = window.setInterval(() => setEightBitGlowGreen((g) => !g), 600);
+    return () => window.clearInterval(id);
+  }, [hoveredCard]);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  const bgBlur = useTransform(scrollYProgress, [0, 0.4, 1], [0, 0, 10]);
+  const bgBlurFilter = useMotionTemplate`blur(${bgBlur}px)`;
+
+  const midOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.6, 0.6, 0]);
+
+  const fgOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0, 1]);
+  const fgBlur = useTransform(scrollYProgress, [0.4, 1], [8, 0]);
+  const fgBlurFilter = useMotionTemplate`blur(${fgBlur}px)`;
+
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.35], ['0%', '-8%']);
+
+  const factionsRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress: factionsProgress } = useScroll({
+    target: factionsRef,
+    offset: ['start 0.7', 'end 0.3'],
+  });
+  const hustlersOpacity = useTransform(factionsProgress, [0, 0.5, 1], [1, 0.5, 0]);
+  const buildersOpacity = useTransform(factionsProgress, [0, 0.5, 1], [0, 0.5, 1]);
+
   return (
     <motion.div
+      data-page="kemetopolis"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={siteImages.heroBackground}
-            alt="Kemetopolis Hero"
-            className="h-full w-full object-cover opacity-60"
+      <section ref={heroRef} className="relative h-[200vh] overflow-hidden">
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <motion.div
+            style={{ scale: bgScale, filter: bgBlurFilter }}
+            className="absolute inset-0 origin-center"
+          >
+            <img
+              src={kemetopolisHeroOrbit}
+              className="w-full h-full object-cover"
+              alt="Kemetopolis from orbit"
+            />
+          </motion.div>
+
+          <motion.div
+            style={{ opacity: midOpacity }}
+            className="absolute inset-0 bg-gradient-to-b from-transparent via-teal-900/40 to-amber-900/30"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background" />
-        </div>
-        <div className="relative z-10 text-center px-4">
-          <h1 className="font-headline font-black text-6xl md:text-[80px] leading-none tracking-tighter text-on-surface uppercase mb-4 drop-shadow-[0_0_15px_rgba(87,241,219,0.4)]">
-            KEMETOPOLIS
-          </h1>
-          <p className="font-body text-xl md:text-2xl text-on-surface-variant tracking-widest uppercase">
-            A City-Planet in the Atum-Ra System
-          </p>
+
+          <motion.div
+            style={{ opacity: fgOpacity, filter: fgBlurFilter }}
+            className="absolute inset-0"
+          >
+            <img
+              src={kemetopolisHeroDetail}
+              className="w-full h-full object-cover"
+              alt="Kemetopolis city detail"
+            />
+          </motion.div>
+
+          <motion.div
+            style={{ opacity: contentOpacity, y: contentY }}
+            className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8"
+          >
+            <h1 className="font-headline font-black text-6xl md:text-[80px] leading-none tracking-tighter text-on-surface uppercase mb-4 drop-shadow-[0_0_15px_rgba(87,241,219,0.4)]">
+              KEMETOPOLIS
+            </h1>
+            <p className="font-body text-xl md:text-2xl text-on-surface-variant tracking-widest uppercase">
+              A City-Planet in the Atum-Ra System
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -49,29 +147,53 @@ export default function Kemetopolis() {
           <h2 className="font-headline font-bold text-4xl text-on-surface uppercase tracking-tight mb-2">The Cosmic Kids</h2>
           <div className="h-1 w-24 bg-primary-container" />
         </div>
-        <motion.div
-          className="flex gap-6 overflow-x-auto no-scrollbar pb-12 px-4 md:px-0"
-          variants={staggerContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={staggerViewport}
-        >
-          {cosmicKids.map((char) => (
-            <motion.div key={char.name} variants={staggerCardVariants} className="flex-none w-72 md:w-80 group cursor-pointer">
-              <div className="relative h-[480px] rounded-xl overflow-hidden mb-6 border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]">
-                <img src={char.img} alt={char.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-6 left-6">
-                  <h3 className="font-headline font-bold text-2xl text-on-surface mb-1">{char.name}</h3>
-                  <p className="text-on-surface-variant font-medium tracking-wide">{char.role}</p>
+        <div className="flex gap-6 overflow-x-auto no-scrollbar pb-12 px-4 md:px-0">
+          {cosmicKids.map((char, index) => {
+            const isHovered = hoveredCard === index;
+            const glowBase =
+              char.name === '8Bit' && isHovered
+                ? eightBitGlowGreen
+                  ? '#22C55E'
+                  : '#EF4444'
+                : NTU_NAME_GLOW[char.name];
+            const nameShadow =
+              isHovered && glowBase
+                ? `0 0 20px ${glowBase}, 0 0 40px ${glowBase}40`
+                : 'none';
+
+            return (
+              <motion.div
+                key={char.name}
+                variants={cardVariants(index)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-60px' }}
+                whileHover={{ scale: 1.02 }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                className="flex-none w-72 md:w-80 group cursor-pointer"
+              >
+                <div className="relative h-[480px] rounded-xl overflow-hidden mb-6 border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]">
+                  <img src={char.img} alt={char.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
+                  <div className="absolute bottom-6 left-6">
+                    <h3
+                      className="transition-all duration-300 font-headline font-bold text-2xl text-on-surface mb-1"
+                      style={{ textShadow: nameShadow }}
+                    >
+                      {char.name}
+                    </h3>
+                    <p className="text-on-surface-variant font-medium tracking-wide">{char.role}</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
       </motion.section>
 
       <motion.section
+        ref={factionsRef}
         className="py-24 md:py-48 px-8 bg-surface"
         initial={sectionReveal.initial}
         whileInView={sectionReveal.whileInView}
@@ -86,8 +208,36 @@ export default function Kemetopolis() {
           viewport={staggerViewport}
         >
           <motion.div variants={staggerCardVariants} className="relative">
-            <div className="aspect-[4/5] rounded-lg overflow-hidden border border-white/5">
-              <img src={siteImages.worldImage} alt="World" className="h-full w-full object-cover opacity-80" />
+            <div className="relative h-[60vh] overflow-hidden rounded-xl border border-white/5">
+              <motion.img
+                src={factionImageDriftCollective}
+                style={{ opacity: hustlersOpacity }}
+                className="absolute inset-0 w-full h-full object-cover"
+                alt="The Drift Collective"
+              />
+              <motion.img
+                src={factionImageCalibrated}
+                style={{ opacity: buildersOpacity }}
+                className="absolute inset-0 w-full h-full object-cover"
+                alt="The Calibrated"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/25 to-transparent pointer-events-none z-[1]" />
+              <div className="absolute inset-0 flex items-end p-8 z-10 pointer-events-none">
+                <div className="relative w-full min-h-[12rem] md:min-h-[11rem]">
+                  <motion.div style={{ opacity: hustlersOpacity }} className="absolute inset-x-0 bottom-0">
+                    <h4 className="font-headline font-bold text-on-surface text-xl mb-2">The Drift Collective (Hustlers)</h4>
+                    <p className="text-sm text-on-surface-variant">
+                      The Hustlers navigate the market sectors and transit corridors, trading information, goods, and influence. They value adaptability, independence, and personal code over institutional law.
+                    </p>
+                  </motion.div>
+                  <motion.div style={{ opacity: buildersOpacity }} className="absolute inset-x-0 bottom-0">
+                    <h4 className="font-headline font-bold text-on-surface text-xl mb-2">The Calibrated (Builders)</h4>
+                    <p className="text-sm">
+                      The Builders architect the physical and civic reality of Kemetopolis using precision engineering rooted in ancient geometric principles. They value order, legacy, and collective infrastructure.
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
             </div>
             <div className="absolute -bottom-8 -right-8 w-48 h-48 border-r-2 border-b-2 border-primary/40 rounded-br-3xl pointer-events-none" />
           </motion.div>

@@ -1,7 +1,28 @@
 import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
 import { siteImages } from '../lib/images';
-import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
+import { sectionReveal } from '../lib/motion';
+
+const gridVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+};
 
 const projectAspects = ['aspect-[4/5]', 'aspect-square', 'aspect-[3/4]', 'aspect-[4/3]', 'aspect-[2/3]', 'aspect-[4/5]'] as const;
 
@@ -15,6 +36,7 @@ const projects = siteImages.workItems.map((item, i) => ({
 export default function Work() {
   return (
     <motion.div
+      data-page="work"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -53,23 +75,30 @@ export default function Work() {
         transition={sectionReveal.transition}
       >
         <motion.div
-          className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
-          variants={staggerContainerVariants}
+          variants={gridVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={staggerViewport}
+          viewport={{ once: true, margin: '-60px' }}
+          className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
         >
           {projects.map((proj) => (
             <motion.div
               key={proj.title}
-              variants={staggerCardVariants}
+              variants={itemVariants}
               className="group relative overflow-hidden rounded-xl bg-surface-container-low transition-all duration-500 hover:scale-[1.02] cursor-pointer break-inside-avoid mb-6"
             >
               <img src={proj.img} alt={proj.title} className={cn('w-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700', proj.aspect)} />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d16] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <p className="text-primary font-headline text-xs tracking-widest uppercase mb-2">{proj.cat}</p>
-                <h3 className="text-2xl font-headline font-bold text-white leading-tight">{proj.title}</h3>
-              </div>
+              <motion.div
+                whileHover={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="absolute inset-0 bg-black/30 flex items-end p-4 z-10"
+              >
+                <div className="w-full">
+                  <p className="text-primary font-headline text-xs tracking-widest uppercase mb-2">{proj.cat}</p>
+                  <h3 className="text-2xl font-headline font-bold text-white leading-tight">{proj.title}</h3>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>

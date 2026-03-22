@@ -80,3 +80,82 @@
 .hero-ken-burns {
   animation: ken-burns 30s ease-in-out infinite alternate;
 }
+
+@keyframes radial-pulse {
+  0% {
+    background-size: 100% 100%;
+    opacity: 0.08;
+  }
+  50% {
+    background-size: 180% 180%;
+    opacity: 0.04;
+  }
+  100% {
+    background-size: 100% 100%;
+    opacity: 0.08;
+  }
+}
+
+.music-pulse-bg {
+  background: radial-gradient(ellipse at center, rgba(129, 140, 248, 0.12), transparent);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: radial-pulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+:root {
+  --page-bg: #0A0A0F;
+  --page-accent: #2DD4BF;
+  --page-ambient-color: rgba(45, 212, 191, 0.08);
+  --page-ambient-position: bottom right;
+  transition: background-color 0.6s ease, --page-accent 0.6s ease;
+}
+
+[data-page="kemetopolis"] {
+  --page-bg: #0F0A08;
+  --page-accent: #C49A6C;
+  --page-ambient-color: rgba(196, 154, 108, 0.08);
+  --page-ambient-position: center;
+}
+
+[data-page="properties"] {
+  --page-bg: #0A0A0F;
+  --page-accent: #2DD4BF;
+  --page-ambient-color: rgba(45, 212, 191, 0.05);
+  --page-ambient-position: bottom center;
+}
+
+[data-page="work"] {
+  --page-bg: #111118;
+  --page-accent: #2DD4BF;
+  --page-ambient-color: rgba(45, 212, 191, 0.03);
+  --page-ambient-position: top left;
+}
+
+[data-page="music"] {
+  --page-bg: #080810;
+  --page-accent: #818CF8;
+  --page-ambient-color: rgba(129, 140, 248, 0.10);
+  --page-ambient-position: center;
+}
+
+[data-page="about"] {
+  --page-bg: #0F0E12;
+  --page-accent: #E8D5B0;
+  --page-ambient-color: rgba(232, 213, 176, 0.07);
+  --page-ambient-position: top left;
+}
+
+.page-ambient-glow {
+  background: radial-gradient(
+    ellipse at var(--page-ambient-position),
+    var(--page-ambient-color),
+    transparent 70%
+  );
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
