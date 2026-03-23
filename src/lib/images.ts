@@ -24,23 +24,23 @@ export const images = {
   },
 
   // ===== KEMETOPOLIS CHARACTERS (Cosmic Kids portraits) =====
-  // Full absolute URLs verified HTTP 200 (HEAD) against pub R2. *-portrait.png under kemetopolis/ currently 404 — swap when uploaded.
+  // Stored under R2 brand/ (not kemetopolis/). Full absolute URLs per public bucket layout.
   characters: {
-    kofi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-candidate.png',
-    mjenzi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/unknown-01.png',
-    eightBit: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit.png',
-    soliloquy: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-candidate.png',
-    zamani: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani.png',
-    anyanwuAma: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama.png',
+    kofi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/kofi-portrait.png',
+    mjenzi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/mjenzi-portrait.png',
+    eightBit: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/8bit-portrait.png',
+    soliloquy: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/soliloquy-portrait.png',
+    zamani: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/zamani-portrait.png',
+    anyanwuAma: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/anyanwu-ama-portrait.png',
   },
   /*
-   * Verification — Cosmic Kids (six full absolute URLs, all 200 OK on public bucket):
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-candidate.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/unknown-01.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-candidate.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama.png
+   * Verification — Cosmic Kids portraits (brand/ on R2):
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/kofi-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/mjenzi-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/8bit-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/soliloquy-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/zamani-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/anyanwu-ama-portrait.png
    */
 
   // ===== KEMETOPOLIS WORLD =====
