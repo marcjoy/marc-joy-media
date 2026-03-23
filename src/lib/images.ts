@@ -23,14 +23,14 @@ export const images = {
     videoLatest: `${R2}/hero/hero-video-latest.mp4`,
   },
 
-  // ===== KEMETOPOLIS CHARACTERS =====
+  // ===== KEMETOPOLIS CHARACTERS (Cosmic Kids portraits) =====
   characters: {
-    kofi: `${R2}/kemetopolis/kofi-candidate.png`,
-    mjenzi: '', // TODO: Upload Mjenzi image to kemetopolis/mjenzi.png
-    eightBit: `${R2}/kemetopolis/8bit.png`,
-    soliloquy: `${R2}/kemetopolis/soliloquy-candidate.png`,
-    zamani: `${R2}/kemetopolis/zamani.png`,
-    anyanwuAma: `${R2}/kemetopolis/anyanwu-ama.png`,
+    kofi: `${R2}/kemetopolis/kofi-portrait.png`,
+    mjenzi: `${R2}/kemetopolis/mjenzi-portrait.png`,
+    eightBit: `${R2}/kemetopolis/8bit-portrait.png`,
+    soliloquy: `${R2}/kemetopolis/soliloquy-portrait.png`,
+    zamani: `${R2}/kemetopolis/zamani-portrait.png`,
+    anyanwuAma: `${R2}/kemetopolis/anyanwu-ama-portrait.png`,
   },
 
   // ===== KEMETOPOLIS WORLD =====

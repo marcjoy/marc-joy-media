@@ -3,14 +3,14 @@ import { useScroll, useTransform, motion } from 'motion/react';
 import { images, siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
-/** Phase 2A Cosmic Kids canon. Portraits from R2 via siteImages. */
+/** Phase 2A Cosmic Kids canon. Portraits from R2 via siteImages. Order: Kofi → 8Bit → Soliloquy → Zamani → Anyanwu Ama → Mjenzi. */
 const cosmicKids = [
-  { name: 'Kofi', role: 'The Wanderer / Crypto-Linguist', img: siteImages.charKofi },
-  { name: 'Mjenzi', role: 'Engineer / Bones of Geb (unconscious)', img: siteImages.charMjenzi },
-  { name: '8Bit', role: 'Data Runner / Eye of Ma\'at (latent)', img: siteImages.char8Bit },
-  { name: 'Soliloquy', role: 'Voice Mystic / Veil of Anansi', img: siteImages.charSoliloquy },
-  { name: 'Zamani', role: 'Time Walker / Crown of Nyame', img: siteImages.charZamani },
-  { name: 'Anyanwu Ama', role: 'Sun Keeper / Flame of Sekhmet', img: siteImages.charAnyanwuAma },
+  { name: 'Kofi', role: 'Protagonist / Griot & Narrator', img: siteImages.charKofi },
+  { name: '8Bit', role: 'Data & Code Manipulation', img: siteImages.char8Bit },
+  { name: 'Soliloquy', role: 'Story & Memory Arts', img: siteImages.charSoliloquy },
+  { name: 'Zamani', role: 'Temporal Manipulation', img: siteImages.charZamani },
+  { name: 'Anyanwu Ama', role: 'Solar Channeling', img: siteImages.charAnyanwuAma },
+  { name: 'Mjenzi', role: 'Tech Construction & Building', img: siteImages.charMjenzi },
 ];
 
 const COSMIC_KIDS_8BIT_INDEX = cosmicKids.findIndex((c) => c.name === '8Bit');
@@ -42,6 +42,15 @@ const NTU_NAME_GLOW: Record<string, string> = {
   Kofi: '#F5F0E8',
   Mjenzi: '#2DD4BF',
   '8Bit': '#EF4444',
+  Soliloquy: '#6366F1',
+  Zamani: '#D4A574',
+  'Anyanwu Ama': '#E07A5F',
+};
+
+/** Ntru Arts hover text color (matches glow); 8Bit uses alternating red/green in render. */
+const NTU_NAME_HOVER_COLOR: Record<string, string> = {
+  Kofi: '#F5F0E8',
+  Mjenzi: '#2DD4BF',
   Soliloquy: '#6366F1',
   Zamani: '#D4A574',
   'Anyanwu Ama': '#E07A5F',
@@ -175,6 +184,15 @@ export default function Kemetopolis() {
                 ? `0 0 20px ${glowBase}, 0 0 40px ${glowBase}40`
                 : 'none';
 
+            const nameHoverColor =
+              isHovered && char.name === '8Bit'
+                ? eightBitGlowGreen
+                  ? '#22C55E'
+                  : '#EF4444'
+                : isHovered
+                  ? NTU_NAME_HOVER_COLOR[char.name]
+                  : undefined;
+
             return (
               <motion.div
                 key={char.name}
@@ -188,12 +206,20 @@ export default function Kemetopolis() {
                 className="flex-none w-72 md:w-80 group cursor-pointer"
               >
                 <div className="relative h-[480px] rounded-xl overflow-hidden mb-6 border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]">
-                  <img src={char.img} alt={char.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
+                  <img
+                    src={char.img}
+                    alt={char.name}
+                    className="h-full w-full object-cover object-top grayscale transition-all duration-500 group-hover:grayscale-0"
+                    loading="lazy"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
                   <div className="absolute bottom-6 left-6">
                     <h3
-                      className="transition-all duration-300 font-headline font-bold text-2xl text-on-surface mb-1"
-                      style={{ textShadow: nameShadow }}
+                      className="mb-1 font-headline text-2xl font-bold text-on-surface transition-all duration-300"
+                      style={{
+                        textShadow: nameShadow,
+                        ...(nameHoverColor ? { color: nameHoverColor } : {}),
+                      }}
                     >
                       {char.name}
                     </h3>
