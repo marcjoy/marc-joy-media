@@ -15,8 +15,11 @@ import About from './pages/About';
 function ScrollToTop() {
   const location = useLocation();
   useEffect(() => {
+    if (location.pathname === '/about' && location.hash === '#contact') {
+      return;
+    }
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
   return null;
 }
 

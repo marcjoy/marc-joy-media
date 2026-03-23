@@ -13,13 +13,16 @@ export default function About() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash === '#contact') {
-      const t = window.setTimeout(() => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-      return () => window.clearTimeout(t);
-    }
-  }, [location.hash]);
+    if (location.hash !== '#contact') return;
+    const scrollToContact = () => {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    };
+    const t = window.setTimeout(() => {
+      scrollToContact();
+      requestAnimationFrame(scrollToContact);
+    }, 100);
+    return () => window.clearTimeout(t);
+  }, [location.pathname, location.hash]);
 
   return (
     <motion.div
@@ -90,7 +93,10 @@ export default function About() {
         <div className="h-px bg-gradient-to-r from-transparent via-[#2a2a35] to-transparent" />
       </div>
 
-      <section id="contact" className="relative py-24 px-6 md:px-12 lg:px-20">
+      <section
+        id="contact"
+        className="relative scroll-mt-28 py-24 px-6 md:px-12 lg:px-20"
+      >
         <div className="max-w-4xl mx-auto">
           <p className="text-[#2DD4BF] text-sm font-medium tracking-[0.2em] uppercase mb-4">Get in Touch</p>
           <h2 className="font-headline text-4xl md:text-5xl font-bold text-[#F5F0E8] mb-6 tracking-tight">

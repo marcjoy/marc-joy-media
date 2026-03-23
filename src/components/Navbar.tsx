@@ -11,7 +11,17 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   );
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+
+  const handleGetInTouch = () => {
+    if (location.pathname === '/about') {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate({ pathname: '/about', hash: '#contact' });
+    }
+  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
