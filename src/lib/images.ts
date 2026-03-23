@@ -130,6 +130,11 @@ export const heroVideos = [
   'https://pub-ade018e64c784701882dc1419e597561.r2.dev/hero/Sailboat_moving_through_202603221739.mp4',
 ];
 
+/** Site-wide ambient loop. WAV is large uncompressed — prefer MP3/OGG in production (e.g. ffmpeg). */
+export const siteAudio = {
+  ambient: `${R2}/hero/NightDreams.wav`,
+};
+
 // ===== RECOMMENDED ASSIGNMENTS =====
 // Use these as the primary images for each site section.
 // Review and adjust after seeing them on the live site.

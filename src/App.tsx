@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import SoundToggle from './components/SoundToggle';
-import { useAmbientSound, ambientPageKeyFromDataPage } from './lib/useAmbientSound';
+import { SoundGate } from './components/SoundGate';
+import { AudioControl } from './components/AudioControl';
 import Home from './pages/Home';
 import Kemetopolis from './pages/Kemetopolis';
 import Properties from './pages/Properties';
@@ -32,13 +32,6 @@ function dataPageFromPath(pathname: string): string {
   return 'home';
 }
 
-function getInitialSoundState(): boolean | null {
-  if (typeof window === 'undefined') return null;
-  if (window.innerWidth < 768) return false;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-  return null;
-}
-
 function AnimatedRoutes() {
   const location = useLocation();
   return (
@@ -62,10 +55,6 @@ function AnimatedRoutes() {
 export default function App() {
   const location = useLocation();
   const dataPage = dataPageFromPath(location.pathname);
-  const ambientPage = ambientPageKeyFromDataPage(dataPage);
-  const [soundEnabled, setSoundEnabled] = useState<boolean | null>(getInitialSoundState);
-
-  useAmbientSound(ambientPage, soundEnabled === true);
 
   return (
     <div className="min-h-screen">
@@ -83,7 +72,8 @@ export default function App() {
 
       <Footer />
 
-      <SoundToggle soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled} />
+      <SoundGate />
+      <AudioControl />
     </div>
   );
 }
