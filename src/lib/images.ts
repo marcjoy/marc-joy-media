@@ -24,23 +24,23 @@ export const images = {
   },
 
   // ===== KEMETOPOLIS CHARACTERS (Cosmic Kids portraits) =====
-  // Verbatim R2 public URLs (do not concatenate — must match bucket objects exactly).
+  // Full absolute URLs verified HTTP 200 (HEAD) against pub R2. *-portrait.png under kemetopolis/ currently 404 — swap when uploaded.
   characters: {
-    kofi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-portrait.png',
-    mjenzi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/mjenzi-portrait.png',
-    eightBit: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit-portrait.png',
-    soliloquy: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-portrait.png',
-    zamani: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani-portrait.png',
-    anyanwuAma: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama-portrait.png',
+    kofi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-candidate.png',
+    mjenzi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/unknown-01.png',
+    eightBit: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit.png',
+    soliloquy: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-candidate.png',
+    zamani: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani.png',
+    anyanwuAma: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama.png',
   },
   /*
-   * Verification — Cosmic Kids portraits (six full absolute URLs):
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/mjenzi-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama-portrait.png
+   * Verification — Cosmic Kids (six full absolute URLs, all 200 OK on public bucket):
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-candidate.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/unknown-01.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-candidate.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama.png
    */
 
   // ===== KEMETOPOLIS WORLD =====
