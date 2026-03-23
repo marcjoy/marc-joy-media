@@ -40,7 +40,9 @@ export const images = {
     wizardLabV5: `${R2}/kemetopolis/wizard-lab-v5.png`,
     microScaleAction: `${R2}/kemetopolis/micro-scale-action.png`,
     microScaleLearning: `${R2}/kemetopolis/micro-scale-learning.png`,
+    /** Kemetopolis page hero (detail layer) — use ≥2560px wide source for sharp full-width / retina. */
     scene1020: `${R2}/kemetopolis/scene-1020.png`,
+    /** Kemetopolis page hero (orbit layer) — use ≥2560px wide source for sharp full-width / retina. */
     scene1226: `${R2}/kemetopolis/scene-1226.png`,
     unknown01: `${R2}/kemetopolis/unknown-01.png`,
     unknown02: `${R2}/kemetopolis/unknown-02.png`,

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useScroll, useTransform, useMotionTemplate, motion } from 'motion/react';
+import { useScroll, useTransform, motion } from 'motion/react';
 import { images, siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
@@ -65,15 +65,21 @@ export default function Kemetopolis() {
     offset: ['start start', 'end start'],
   });
 
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
+  /* Cap scale at 1.03 — larger zoom upscales raster and reads soft on retina viewports. */
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.03]);
   const bgBlur = useTransform(scrollYProgress, [0, 0.4, 1], [0, 0, 10]);
-  const bgBlurFilter = useMotionTemplate`blur(${bgBlur}px)`;
+  const bgBlurFilter = useTransform(bgBlur, (v) =>
+    v > 0.02 ? `blur(${v.toFixed(2)}px)` : 'none',
+  );
 
   const midOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.6, 0.6, 0]);
 
   const fgOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0, 1]);
-  const fgBlur = useTransform(scrollYProgress, [0.4, 1], [8, 0]);
-  const fgBlurFilter = useMotionTemplate`blur(${fgBlur}px)`;
+  /* Include scroll 0 → blur 0 so the layer is not stuck at 8px when progress is below 0.4. */
+  const fgBlur = useTransform(scrollYProgress, [0, 0.4, 1], [0, 8, 0]);
+  const fgBlurFilter = useTransform(fgBlur, (v) =>
+    v > 0.02 ? `blur(${v.toFixed(2)}px)` : 'none',
+  );
 
   const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.35], ['0%', '-8%']);
@@ -96,13 +102,17 @@ export default function Kemetopolis() {
       <section ref={heroRef} className="relative h-[200vh] overflow-hidden">
         <div className="sticky top-0 h-screen overflow-hidden">
           <motion.div
-            style={{ scale: bgScale, filter: bgBlurFilter }}
+            style={{ scale: bgScale, filter: bgBlurFilter, willChange: 'auto' }}
             className="absolute inset-0 origin-center"
           >
             <img
               src={kemetopolisHeroOrbit}
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
               alt="Kemetopolis from orbit"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              style={{ imageRendering: '-webkit-optimize-contrast' }}
             />
           </motion.div>
 
@@ -112,13 +122,17 @@ export default function Kemetopolis() {
           />
 
           <motion.div
-            style={{ opacity: fgOpacity, filter: fgBlurFilter }}
+            style={{ opacity: fgOpacity, filter: fgBlurFilter, willChange: 'auto' }}
             className="absolute inset-0"
           >
             <img
               src={kemetopolisHeroDetail}
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
               alt="Kemetopolis city detail"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              style={{ imageRendering: '-webkit-optimize-contrast' }}
             />
           </motion.div>
 
