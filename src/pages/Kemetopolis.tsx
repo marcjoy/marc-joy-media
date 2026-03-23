@@ -10,7 +10,7 @@ const cosmicKids = [
   { name: 'Soliloquy', role: 'Story & Memory Arts', img: siteImages.charSoliloquy },
   { name: 'Zamani', role: 'Temporal Manipulation', img: siteImages.charZamani },
   { name: 'Anyanwu Ama', role: 'Solar Channeling', img: siteImages.charAnyanwuAma },
-  { name: 'Mjenzi', role: 'Tech Construction & Building', img: siteImages.charMjenzi },
+  { name: 'Mjenzi', role: 'Tech Construction', img: siteImages.charMjenzi },
 ];
 
 const COSMIC_KIDS_8BIT_INDEX = cosmicKids.findIndex((c) => c.name === '8Bit');

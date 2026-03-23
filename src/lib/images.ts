@@ -24,16 +24,24 @@ export const images = {
   },
 
   // ===== KEMETOPOLIS CHARACTERS (Cosmic Kids portraits) =====
-  // These paths must match objects in the R2 bucket. *-portrait.png names 404 until those files are uploaded.
+  // Verbatim R2 public URLs (do not concatenate — must match bucket objects exactly).
   characters: {
-    kofi: `${R2}/kemetopolis/kofi-candidate.png`,
-    // No mjenzi asset on R2 yet — swap to mjenzi-portrait.png (or mjenzi.png) after upload.
-    mjenzi: `${R2}/kemetopolis/unknown-01.png`,
-    eightBit: `${R2}/kemetopolis/8bit.png`,
-    soliloquy: `${R2}/kemetopolis/soliloquy-candidate.png`,
-    zamani: `${R2}/kemetopolis/zamani.png`,
-    anyanwuAma: `${R2}/kemetopolis/anyanwu-ama.png`,
+    kofi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-portrait.png',
+    mjenzi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/mjenzi-portrait.png',
+    eightBit: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit-portrait.png',
+    soliloquy: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-portrait.png',
+    zamani: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani-portrait.png',
+    anyanwuAma: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama-portrait.png',
   },
+  /*
+   * Verification — Cosmic Kids portraits (six full absolute URLs):
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/kofi-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/mjenzi-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/8bit-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/soliloquy-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/zamani-portrait.png
+   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/kemetopolis/anyanwu-ama-portrait.png
+   */
 
   // ===== KEMETOPOLIS WORLD =====
   world: {
