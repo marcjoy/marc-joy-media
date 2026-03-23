@@ -124,6 +124,12 @@ export const images = {
   },
 } as const;
 
+export const heroVideos = [
+  'https://pub-ade018e64c784701882dc1419e597561.r2.dev/hero/Pedestrians_move_along_202603221739.mp4',
+  'https://pub-ade018e64c784701882dc1419e597561.r2.dev/hero/Water_ripples_moving_202603221739.mp4',
+  'https://pub-ade018e64c784701882dc1419e597561.r2.dev/hero/Sailboat_moving_through_202603221739.mp4',
+];
+
 // ===== RECOMMENDED ASSIGNMENTS =====
 // Use these as the primary images for each site section.
 // Review and adjust after seeing them on the live site.

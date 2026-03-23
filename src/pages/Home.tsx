@@ -1,9 +1,10 @@
-import { Fragment, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import type { MotionValue } from 'motion/react';
 import { useScroll, useTransform, motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { siteImages } from '../lib/images';
+import HeroVideoCarousel from '../components/HeroVideoCarousel';
+import { heroVideos, siteImages } from '../lib/images';
 import { sectionReveal } from '../lib/motion';
 
 const MANIFESTO_TEXT =
@@ -92,6 +93,16 @@ export default function Home() {
     },
   };
 
+  useEffect(() => {
+    const id = 'elfsight-platform-js';
+    if (document.getElementById(id)) return;
+    const script = document.createElement('script');
+    script.id = id;
+    script.src = 'https://elfsightcdn.com/platform.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <motion.div
       data-page="home"
@@ -105,27 +116,11 @@ export default function Home() {
         className="relative min-h-screen flex flex-col justify-end items-start overflow-hidden px-8 md:px-24 pb-24"
       >
         <motion.div style={{ y: bgY }} className="absolute inset-0 -top-[30%] -bottom-[30%]">
-          <img
-            src={siteImages.heroBackground}
-            alt=""
-            aria-hidden
-            className="hero-ken-burns absolute inset-0 z-0 h-full w-full object-cover"
-          />
-          <video
-            className="absolute inset-0 z-[1] h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={siteImages.heroBackground}
-            aria-hidden
-          >
-            <source src={siteImages.heroVideo} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 hero-gradient pointer-events-none" />
+          <HeroVideoCarousel videos={heroVideos} />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/60 to-transparent z-10 pointer-events-none" />
         </motion.div>
 
-        <motion.div style={{ y: headlineY, opacity: contentOpacity }} className="relative z-10 max-w-5xl">
+        <motion.div style={{ y: headlineY, opacity: contentOpacity }} className="relative z-20 max-w-5xl">
           <div className="flex flex-col gap-2 mb-6">
             <span className="text-on-surface-variant font-headline font-bold uppercase tracking-[0.3em] text-sm md:text-base">Marc Joy Media</span>
             <span className="text-on-surface-variant font-body font-medium uppercase tracking-widest text-xs opacity-60">Afrofuturist Multimedia Studio / Seattle</span>
@@ -244,6 +239,18 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </motion.section>
+
+      <section
+        className="py-16 md:py-24 px-8 md:px-24 bg-surface border-t border-white/5"
+        aria-label="Instagram feed"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div
+            className="elfsight-app-c73d3320-8b1e-4483-b148-876dbdaf023f"
+            data-elfsight-app-lazy=""
+          />
+        </div>
+      </section>
     </motion.div>
   );
 }
