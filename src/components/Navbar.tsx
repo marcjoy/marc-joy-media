@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../lib/utils';
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -66,12 +66,13 @@ export default function Navbar() {
           Shop
         </a>
       </div>
-      <Link
-        to="/about"
+      <button
+        type="button"
+        onClick={handleGetInTouch}
         className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-md font-bold text-sm tracking-tight hover:scale-105 active:scale-95 transition-all duration-300 uppercase font-headline"
       >
         Get in Touch
-      </Link>
+      </button>
     </nav>
   );
 }
