@@ -83,8 +83,8 @@ export default function App() {
     <div className="min-h-screen">
       <div className="grain-overlay" />
 
-      <div className="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-tertiary ambient-glow" />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-primary ambient-glow" />
+      <div className="ambient-glow fixed top-[-10%] left-[-10%] h-[clamp(16rem,42vw,31.25rem)] w-[clamp(16rem,42vw,31.25rem)] rounded-full bg-tertiary" />
+      <div className="ambient-glow fixed right-[-10%] bottom-[-10%] h-[clamp(18rem,48vw,37.5rem)] w-[clamp(18rem,48vw,37.5rem)] rounded-full bg-primary" />
 
       <ScrollToTop />
       <Navbar />

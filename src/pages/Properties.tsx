@@ -35,7 +35,7 @@ export default function Properties() {
       exit={{ opacity: 0 }}
       className="pb-32"
     >
-      <div className="px-8 pt-48 md:px-24">
+      <div className="px-[clamp(1rem,5vw,2rem)] pt-48 md:px-24">
         <motion.section
           className="mx-auto mb-20 max-w-7xl"
           initial={sectionReveal.initial}
@@ -43,7 +43,7 @@ export default function Properties() {
           viewport={sectionReveal.viewport}
           transition={sectionReveal.transition}
         >
-          <h1 className="mb-8 max-w-4xl font-headline text-7xl font-black leading-none tracking-tighter text-on-surface md:text-[80px]">
+          <h1 className="mb-8 max-w-4xl font-headline text-[clamp(2.75rem,12vw+0.25rem,5rem)] font-black leading-none tracking-tighter text-on-surface md:text-[80px]">
             THE WORLDS
           </h1>
           <p className="max-w-xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
@@ -58,7 +58,7 @@ export default function Properties() {
           transition={sectionReveal.transition}
         >
           <motion.div
-            className="mx-auto grid max-w-7xl grid-cols-1 gap-6 auto-rows-[320px] md:grid-cols-12"
+            className="mx-auto grid max-w-7xl grid-cols-1 gap-6 auto-rows-[minmax(min(45vw,20rem),auto)] md:grid-cols-12 md:auto-rows-[minmax(20rem,auto)]"
             variants={staggerContainerVariants}
             initial="hidden"
             whileInView="visible"
@@ -157,10 +157,10 @@ export default function Properties() {
           >
             <motion.div
               variants={staggerCardVariants}
-              className="relative min-h-[320px] overflow-hidden rounded-xl border border-white/5 bg-[#141420]"
+              className="relative min-h-[min(50svh,20rem)] overflow-hidden rounded-xl border border-white/5 bg-[#141420] md:min-h-[20rem]"
             >
               <motion.div
-                className="relative h-full min-h-[320px] w-full overflow-hidden"
+                className="relative h-full min-h-[min(50svh,20rem)] w-full overflow-hidden md:min-h-[20rem]"
                 initial="rest"
                 whileHover="hover"
                 variants={scatteredThronesLetterboxParent}

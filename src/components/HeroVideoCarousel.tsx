@@ -8,7 +8,10 @@ const videoBaseStyle: CSSProperties = {
   inset: 0,
   width: '100%',
   height: '100%',
+  minWidth: '100%',
+  minHeight: '100%',
   objectFit: 'cover',
+  objectPosition: 'center center',
   transition: 'opacity 1.5s ease-in-out',
 };
 

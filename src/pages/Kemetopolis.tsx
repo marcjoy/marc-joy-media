@@ -154,7 +154,7 @@ export default function Kemetopolis() {
             style={{ opacity: contentOpacity, y: contentY }}
             className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8"
           >
-            <h1 className="font-headline font-black text-6xl md:text-[80px] leading-none tracking-tighter text-on-surface uppercase mb-4 drop-shadow-[0_0_15px_rgba(87,241,219,0.4)]">
+            <h1 className="mb-4 font-headline text-[clamp(2.5rem,10vw+0.5rem,5rem)] font-black uppercase leading-none tracking-tighter text-on-surface drop-shadow-[0_0_15px_rgba(87,241,219,0.4)] md:text-[80px]">
               KEMETOPOLIS
             </h1>
             <p className="font-body text-xl md:text-2xl text-on-surface-variant tracking-widest uppercase">
@@ -215,7 +215,7 @@ export default function Kemetopolis() {
                 onMouseLeave={() => setHoveredCard(null)}
                 className="w-full min-w-0 group cursor-pointer"
               >
-                <div className="relative h-[420px] sm:h-[460px] lg:h-[480px] w-full rounded-xl overflow-hidden border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]">
+                <div className="relative h-[clamp(22rem,72vw,30rem)] w-full overflow-hidden rounded-xl border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)] sm:h-[clamp(24rem,68vw,30rem)] lg:h-[30rem]">
                   <img
                     src={char.img}
                     alt={char.name}

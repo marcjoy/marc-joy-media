@@ -81,11 +81,14 @@
   animation: ken-burns 30s ease-in-out infinite alternate;
 }
 
-/* Hero video carousel */
-.hero-video-carousel video {
+/* Hero video carousel — cover short viewports; center crop */
+.hero-video-carousel video,
+.hero-video-carousel img {
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
+  object-fit: cover;
+  object-position: center center;
 }
 
 @keyframes radial-pulse {

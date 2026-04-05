@@ -47,7 +47,7 @@ export default function About() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-32 max-w-7xl mx-auto px-8 py-32"
+      className="mx-auto max-w-7xl px-[clamp(1rem,5vw,2rem)] pt-32 py-32"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         <motion.section
@@ -61,7 +61,9 @@ export default function About() {
             <img src={siteImages.aboutPortrait} alt="MarcJoy" className="h-full w-full object-cover" />
           </div>
           <div className="mt-12 space-y-2">
-            <h1 className="text-[80px] leading-[0.9] font-black font-headline tracking-tighter text-on-surface uppercase italic">MarcJoy</h1>
+            <h1 className="font-headline text-[clamp(2.5rem,11vw+0.25rem,5rem)] font-black uppercase leading-[0.9] tracking-tighter text-on-surface italic md:text-[80px]">
+              MarcJoy
+            </h1>
             <p className="text-xl font-headline tracking-widest text-primary-container font-light">FOUNDER, MARC JOY MEDIA</p>
             <div className="flex items-center gap-2 text-on-surface-variant">
               <MapPin className="w-4 h-4" />

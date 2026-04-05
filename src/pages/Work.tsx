@@ -53,7 +53,7 @@ function ClientCard({ project }: { project: ClientProject }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-lg border border-white/5 border-l-2 bg-zinc-900 [border-left-color:var(--page-accent)] md:flex-row md:items-stretch">
       {project.image ? (
-        <div className="box-border flex h-[200px] w-full shrink-0 items-center justify-center border-b border-white/5 bg-white p-6 md:w-[280px] md:border-b-0 md:border-r md:border-white/5">
+        <div className="box-border flex h-[clamp(10rem,38vw,12.5rem)] w-full shrink-0 items-center justify-center border-b border-white/5 bg-white p-6 md:h-auto md:min-h-[12.5rem] md:w-[min(100%,17.5rem)] md:border-r md:border-b-0 md:border-white/5">
           <img
             src={project.image}
             alt={project.imageAlt ?? ''}
@@ -120,7 +120,7 @@ export default function Work() {
           viewport={sectionReveal.viewport}
           transition={sectionReveal.transition}
         >
-          <h1 className="mb-6 max-w-4xl font-headline text-5xl font-black leading-none tracking-tighter text-on-surface md:text-7xl md:text-[80px]">
+          <h1 className="mb-6 max-w-4xl font-headline text-[clamp(2.5rem,10vw+0.5rem,5rem)] font-black leading-none tracking-tighter text-on-surface md:text-[80px]">
             THE WORK
           </h1>
           <p className="mb-4 max-w-xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">

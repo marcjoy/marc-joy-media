@@ -29,7 +29,7 @@ export default function Music() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="relative z-10 pt-32 pb-24 px-8 max-w-7xl mx-auto"
+      className="relative z-10 mx-auto max-w-7xl px-[clamp(1rem,5vw,2rem)] pt-32 pb-24"
     >
       <div className="fixed inset-0 z-0 music-pulse-bg pointer-events-none" aria-hidden />
       <div className="relative z-10">
@@ -48,12 +48,12 @@ export default function Music() {
           >
             <motion.div variants={staggerCardVariants} className="lg:col-span-7 space-y-6">
               <div className="space-y-2">
-                <h1 className="text-[80px] font-headline font-bold leading-[0.9] tracking-tighter text-on-surface">
+                <h1 className="font-headline text-[clamp(2.25rem,12vw+0.25rem,5rem)] font-bold leading-[0.9] tracking-tighter text-on-surface md:text-[80px]">
                   BLAQ
                   <br />
                   TIMBRE
                 </h1>
-                <h2 className="text-[40px] font-headline font-bold text-primary-container leading-tight">
+                <h2 className="font-headline text-[clamp(1.5rem,6vw+0.5rem,2.5rem)] font-bold leading-tight text-primary-container md:text-[40px]">
                   Sonic Cosmos
                 </h2>
               </div>
@@ -99,12 +99,15 @@ export default function Music() {
                 <iframe
                   src={`https://open.spotify.com/embed/album/${SONIC_COSMOS_SPOTIFY_ALBUM_EMBED_ID}?utm_source=generator&theme=0`}
                   width="100%"
-                  height={352}
                   frameBorder="0"
                   allowFullScreen
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                   loading="lazy"
-                  style={{ borderRadius: '12px' }}
+                  className="w-full max-w-full"
+                  style={{
+                    borderRadius: 'clamp(0.5rem, 2vw, 0.75rem)',
+                    height: 'clamp(16.25rem, 58vw, 22rem)',
+                  }}
                   title="Blaq Timbre - Sonic Cosmos"
                 />
               </div>

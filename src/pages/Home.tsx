@@ -108,24 +108,35 @@ export default function Home() {
     >
       <section
         ref={heroRef}
-        className="relative min-h-screen flex flex-col justify-end items-start overflow-hidden px-8 md:px-24 pb-24"
+        className="relative flex min-h-svh max-md:min-h-[max(100svh,667px)] flex-col justify-end items-stretch overflow-hidden px-[clamp(1rem,5vw,2rem)] pb-16 pt-28 md:min-h-screen md:items-start md:px-24 md:pb-24 md:pt-0"
       >
-        <motion.div style={{ y: bgY }} className="absolute inset-0 -top-[30%] -bottom-[30%]">
+        <motion.div
+          style={{ y: bgY }}
+          className="absolute inset-0 -top-[30%] -bottom-[30%] min-h-full w-full min-w-full"
+        >
           <HeroVideoCarousel videos={heroVideos} />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/60 to-transparent z-10 pointer-events-none" />
         </motion.div>
 
-        <motion.div style={{ y: headlineY, opacity: contentOpacity }} className="relative z-20 max-w-5xl">
-          <div className="flex flex-col gap-2 mb-6">
-            <span className="text-on-surface-variant font-headline font-bold uppercase tracking-[0.3em] text-sm md:text-base">Marc Joy Media</span>
-            <span className="text-on-surface-variant font-body font-medium uppercase tracking-widest text-xs opacity-60">Afrofuturist Multimedia Studio / Seattle</span>
+        <motion.div
+          style={{ y: headlineY, opacity: contentOpacity }}
+          className="relative z-20 flex w-full max-w-5xl flex-col max-md:max-w-none"
+        >
+          <div className="mb-6 flex w-full flex-col gap-2">
+            <span className="text-on-surface-variant font-headline font-bold uppercase tracking-[0.3em] text-sm md:text-base">
+              Marc Joy Media
+            </span>
+            <span className="text-on-surface-variant font-body font-medium uppercase tracking-widest text-xs opacity-60">
+              Afrofuturist Multimedia Studio / Seattle
+            </span>
           </div>
-          <h1 className="text-6xl md:text-[5rem] lg:text-[7rem] font-black font-headline leading-[0.9] tracking-tighter text-on-surface mb-10">
-            WE DREAM <br/>IN PUBLIC
+          <h1 className="mb-8 flex max-md:w-full flex-col gap-0 font-headline text-[clamp(1.875rem,11vw+0.35rem,4.5rem)] font-black leading-[0.9] tracking-tighter text-on-surface md:mb-10 md:text-[5rem] lg:text-[7rem]">
+            <span className="block">WE DREAM</span>
+            <span className="block">IN PUBLIC</span>
           </h1>
           <Link
             to="/properties"
-            className="group inline-flex items-center gap-4 bg-primary-container text-on-primary-container px-10 py-5 rounded-md font-black font-headline uppercase tracking-tighter text-xl hover:bg-primary transition-all duration-500 shadow-[0_0_40px_rgba(45,212,191,0.25)]"
+            className="group flex w-full max-md:max-w-none items-center justify-center gap-4 bg-primary-container px-8 py-5 font-headline text-xl font-black uppercase tracking-tighter text-on-primary-container shadow-[0_0_40px_rgba(45,212,191,0.25)] transition-all duration-500 hover:bg-primary md:inline-flex md:w-auto md:justify-start md:px-10"
           >
             Enter the World
             <ArrowRight className="group-hover:translate-x-2 transition-transform" />
@@ -134,7 +145,7 @@ export default function Home() {
       </section>
 
       <motion.section
-        className="py-[120px] px-8 flex justify-center items-center bg-surface-container-lowest"
+        className="flex items-center justify-center bg-surface-container-lowest px-[clamp(1rem,5vw,2rem)] py-[clamp(3.5rem,18vw,7.5rem)]"
         initial={sectionReveal.initial}
         whileInView={sectionReveal.whileInView}
         viewport={sectionReveal.viewport}
@@ -150,7 +161,7 @@ export default function Home() {
       </motion.section>
 
       <motion.section
-        className="py-[120px] px-8 md:px-24 bg-surface"
+        className="bg-surface px-[clamp(1rem,5vw,2rem)] py-[clamp(3.5rem,18vw,7.5rem)] md:px-24"
         initial={sectionReveal.initial}
         whileInView={sectionReveal.whileInView}
         viewport={sectionReveal.viewport}
@@ -159,7 +170,9 @@ export default function Home() {
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h3 className="text-on-surface-variant font-headline font-bold uppercase tracking-widest text-sm mb-4">The Worlds</h3>
-            <h2 className="text-5xl font-black font-headline tracking-tighter text-on-surface">OWNED UNIVERSES</h2>
+            <h2 className="font-headline text-[clamp(2rem,8vw+0.5rem,3.5rem)] font-black tracking-tighter text-on-surface md:text-5xl">
+              OWNED UNIVERSES
+            </h2>
           </div>
           <p className="max-w-md text-on-surface-variant font-body text-lg leading-relaxed opacity-80">
             Original Marc Joy Media properties—fiction, culture platforms, and film—from one studio frequency.
@@ -170,9 +183,9 @@ export default function Home() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-6 min-h-[720px]"
+          className="grid min-h-[min(90svh,45rem)] grid-cols-1 gap-6 md:grid-cols-12"
         >
-          <motion.div variants={cardVariants} className="md:col-span-8 md:row-span-2 relative rounded-xl overflow-hidden group min-h-[360px]">
+          <motion.div variants={cardVariants} className="group relative min-h-[min(55svh,22.5rem)] overflow-hidden rounded-xl md:col-span-8 md:row-span-2 md:min-h-[22.5rem]">
             <img src={siteImages.propertyKemetopolis} alt="Kemetopolis" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-10 flex flex-col items-start w-full">
@@ -184,7 +197,7 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
-          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group min-h-[320px]">
+          <motion.div variants={cardVariants} className="group relative min-h-[min(42svh,20rem)] overflow-hidden rounded-xl md:col-span-4 md:min-h-[20rem]">
             <img src={siteImages.propertyNeverOneMonth} alt="NeverOneMonth / NileGen" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">
@@ -196,7 +209,7 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
-          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group min-h-[320px]">
+          <motion.div variants={cardVariants} className="group relative min-h-[min(42svh,20rem)] overflow-hidden rounded-xl md:col-span-4 md:min-h-[20rem]">
             <img src={siteImages.propertyScatteredThrones} alt="Scattered Thrones" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">
