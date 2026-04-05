@@ -2,6 +2,10 @@ import { useState, type MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+import {
+  ElfsightInstagramFeed,
+  ELF_INSTAGRAM_FEED_PORTFOLIO,
+} from '../components/ElfsightInstagramFeed';
 import { siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
@@ -43,8 +47,9 @@ export default function Properties() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-48 pb-32 px-8 md:px-24"
+      className="pb-32"
     >
+      <div className="pt-48 px-8 md:px-24">
       <motion.section
         className="max-w-7xl mx-auto mb-20"
         initial={sectionReveal.initial}
@@ -242,6 +247,9 @@ export default function Properties() {
           </motion.div>
         </motion.div>
       </motion.section>
+      </div>
+
+      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PORTFOLIO} ariaLabel="Instagram feed" />
     </motion.div>
   );
 }

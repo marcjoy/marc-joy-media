@@ -7,7 +7,6 @@ import HeroVideoCarousel from '../components/HeroVideoCarousel';
 import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
 import {
   ElfsightInstagramFeed,
-  ELF_INSTAGRAM_FEED_LEGACY,
   ELF_INSTAGRAM_FEED_PRIMARY,
 } from '../components/ElfsightInstagramFeed';
 import { heroVideos, siteImages } from '../lib/images';
@@ -241,8 +240,7 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PRIMARY} ariaLabel="Instagram feed" />
-      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_LEGACY} ariaLabel="Instagram gallery" />
+      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PRIMARY} />
 
       <ElfsightAppointmentBooking />
     </motion.div>

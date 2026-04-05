@@ -5,9 +5,9 @@ import { ensureElfsightPlatform } from '../lib/elfsight';
 export const ELF_INSTAGRAM_FEED_PRIMARY =
   'elfsight-app-a897196b-bbdb-4b5e-bad4-ab5e4986a481';
 
-/** Earlier Instagram feed widget (kept alongside primary on home). */
-export const ELF_INSTAGRAM_FEED_LEGACY =
-  'elfsight-app-c73d3320-8b1e-4483-b148-876dbdaf023f';
+/** Elfsight Instagram Feed | Untitled Instagram Feed 2 (portfolio) */
+export const ELF_INSTAGRAM_FEED_PORTFOLIO =
+  'elfsight-app-cfa88dce-2671-4712-81b0-312b9b4be4f4';
 
 type ElfsightInstagramFeedProps = {
   embedClass: string;
