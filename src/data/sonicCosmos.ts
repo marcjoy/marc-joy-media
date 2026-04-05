@@ -1,5 +1,8 @@
 /** Official Sonic Cosmos (Blaq Timbre) track order and durations from store metadata. */
 
+/** Apple Music album id — used to load official preview audio for the on-site player. */
+export const SONIC_COSMOS_APPLE_ALBUM_ID = '1851184150';
+
 export const sonicCosmosTracks: { title: string; durationSec: number }[] = [
   { title: 'FLOW', durationSec: 142 },
   { title: 'AIR', durationSec: 183 },

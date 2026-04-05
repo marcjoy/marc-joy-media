@@ -10,6 +10,11 @@ import Work from './pages/Work';
 import Music from './pages/Music';
 import About from './pages/About';
 import Magazine from './pages/Magazine';
+import Shop from './pages/Shop';
+import NeverOneMonth from './pages/NeverOneMonth';
+import Mars from './pages/Mars';
+import ScatteredThrones from './pages/ScatteredThrones';
+import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -23,19 +28,25 @@ function ScrollToTop() {
 }
 
 function dataPageFromPath(pathname: string): string {
-  if (pathname === '/' || pathname === '') return 'home';
-  const seg = pathname.split('/').filter(Boolean)[0];
+  const parts = pathname.split('/').filter(Boolean);
+  if (parts.length === 0) return 'home';
+  if (parts.length > 1) return 'not-found';
+  const seg = parts[0];
   if (
     seg === 'kemetopolis' ||
     seg === 'properties' ||
     seg === 'work' ||
     seg === 'music' ||
     seg === 'about' ||
-    seg === 'magazine'
+    seg === 'magazine' ||
+    seg === 'shop' ||
+    seg === 'neveronemonth' ||
+    seg === 'mars' ||
+    seg === 'scattered-thrones'
   ) {
     return seg;
   }
-  return 'home';
+  return 'not-found';
 }
 
 function AnimatedRoutes() {
@@ -53,6 +64,11 @@ function AnimatedRoutes() {
           <Route path="/music" element={<Music />} />
           <Route path="/about" element={<About />} />
           <Route path="/magazine" element={<Magazine />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/neveronemonth" element={<NeverOneMonth />} />
+          <Route path="/mars" element={<Mars />} />
+          <Route path="/scattered-thrones" element={<ScatteredThrones />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </>
     </AnimatePresence>

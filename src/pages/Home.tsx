@@ -125,7 +125,7 @@ export default function Home() {
             WE DREAM <br/>IN PUBLIC
           </h1>
           <Link
-            to="/kemetopolis"
+            to="/properties"
             className="group inline-flex items-center gap-4 bg-primary-container text-on-primary-container px-10 py-5 rounded-md font-black font-headline uppercase tracking-tighter text-xl hover:bg-primary transition-all duration-500 shadow-[0_0_40px_rgba(45,212,191,0.25)]"
           >
             Enter the World
@@ -192,9 +192,9 @@ export default function Home() {
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Education</span>
               <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">MARS Early Learning</h3>
               <p className="text-on-surface-variant font-body text-sm mb-4">Afrofuturist early childhood education for the youngest dreamers, ages 3 through 7.</p>
-              <button type="button" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
+              <Link to="/mars" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
                 Explore <ArrowRight className="w-4 h-4 -rotate-45" />
-              </button>
+              </Link>
             </div>
           </motion.div>
           <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
@@ -204,9 +204,9 @@ export default function Home() {
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Culture</span>
               <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">NeverOneMonth</h3>
               <p className="text-on-surface-variant font-body text-sm mb-4">365 days of Black history, culture, and future. Because it was never just one month.</p>
-              <button type="button" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
+              <Link to="/neveronemonth" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
                 Explore <ArrowRight className="w-4 h-4 -rotate-45" />
-              </button>
+              </Link>
             </div>
           </motion.div>
           <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
@@ -216,9 +216,9 @@ export default function Home() {
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Film</span>
               <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">Scattered Thrones</h3>
               <p className="text-on-surface-variant font-body text-sm mb-4">Documentary and narrative film production rooted in Black stories and Pacific Northwest history.</p>
-              <button type="button" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
+              <Link to="/scattered-thrones" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
                 Explore <ArrowRight className="w-4 h-4 -rotate-45" />
-              </button>
+              </Link>
             </div>
           </motion.div>
           <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
@@ -228,9 +228,14 @@ export default function Home() {
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Heritage</span>
               <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">NW Black Pioneers</h3>
               <p className="text-on-surface-variant font-body text-sm mb-4">Preserving and amplifying the history of Black communities across the Pacific Northwest.</p>
-              <button type="button" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
+              <a
+                href="https://northwestblackpioneers.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all"
+              >
                 Explore <ArrowRight className="w-4 h-4 -rotate-45" />
-              </button>
+              </a>
             </div>
           </motion.div>
         </motion.div>

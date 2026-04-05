@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { cn } from '../lib/utils';
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -11,17 +11,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   );
 
 export default function Navbar() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-
-  const handleGetInTouch = () => {
-    if (location.pathname === '/about') {
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate({ pathname: '/about', hash: '#contact' });
-    }
-  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -62,22 +52,16 @@ export default function Navbar() {
         <NavLink to="/magazine" className={navLinkClass}>
           Magazine
         </NavLink>
-        <a
-          href="https://afrofuturisticdreams.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-headline font-bold tracking-tighter uppercase transition-all duration-300 text-sm text-on-surface opacity-80 hover:opacity-100 hover:text-primary-container"
-        >
+        <NavLink to="/shop" className={navLinkClass}>
           Shop
-        </a>
+        </NavLink>
       </div>
-      <button
-        type="button"
-        onClick={handleGetInTouch}
-        className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-md font-bold text-sm tracking-tight hover:scale-105 active:scale-95 transition-all duration-300 uppercase font-headline"
+      <a
+        href="mailto:marcus@marcjoy.com"
+        className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-md font-bold text-sm tracking-tight hover:scale-105 active:scale-95 transition-all duration-300 uppercase font-headline inline-block text-center"
       >
         Get in Touch
-      </button>
+      </a>
     </nav>
   );
 }

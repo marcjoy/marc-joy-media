@@ -10,7 +10,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-wrap justify-center gap-8 font-body text-sm tracking-wide uppercase">
           <a
-            href="https://www.instagram.com/marcjoymedia/"
+            href="https://instagram.com/marcjoymedia"
             target="_blank"
             rel="noopener noreferrer"
             className="text-on-surface-variant hover:text-primary transition-colors"
@@ -39,17 +39,12 @@ export default function Footer() {
           >
             Magazine
           </Link>
-          <a
-            href="https://afrofuturisticdreams.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/shop"
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
             Shop
-          </a>
-          <button type="button" className="text-on-surface-variant hover:text-primary transition-colors">Privacy</button>
-          <button type="button" className="text-on-surface-variant hover:text-primary transition-colors">Terms</button>
-          <button type="button" className="text-on-surface-variant hover:text-primary transition-colors">Press Kit</button>
+          </Link>
         </div>
         <div className="flex items-center gap-4">
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>

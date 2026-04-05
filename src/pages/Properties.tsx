@@ -1,4 +1,5 @@
 import { useState, type MouseEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { siteImages } from '../lib/images';
@@ -92,9 +93,12 @@ export default function Properties() {
                 <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Universe</span>
                 <h3 className="text-3xl font-bold font-headline mb-2 text-on-surface">Kemetopolis</h3>
                 <p className="text-on-surface-variant text-base mb-6 max-w-md">A city-planet universe spanning novels, art, and film.</p>
-                <button type="button" className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto">
+                <Link
+                  to="/kemetopolis"
+                  className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto"
+                >
                   Explore <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
               </div>
             </motion.div>
           </motion.div>
@@ -112,9 +116,12 @@ export default function Properties() {
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Culture</span>
               <h3 className="text-3xl font-bold font-headline mb-2 text-on-surface leading-tight">NeverOneMonth</h3>
               <p className="text-on-surface-variant text-base mb-6">365 days of Black history, culture, and future. Because it was never just one month.</p>
-              <button type="button" className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto">
+              <Link
+                to="/neveronemonth"
+                className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto"
+              >
                 Explore <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
             </div>
           </motion.div>
           <motion.div variants={staggerCardVariants} className="md:col-span-4 md:row-span-2 relative overflow-hidden rounded-xl border border-white/5 bg-[#141420]">
@@ -132,9 +139,12 @@ export default function Properties() {
                 <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Education</span>
                 <h3 className="text-2xl font-bold font-headline mb-2 text-on-surface">MARS Early Learning</h3>
                 <p className="text-on-surface-variant text-base mb-6">Afrofuturist early childhood education for the youngest dreamers, ages 3 through 7.</p>
-                <button type="button" className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto">
+                <Link
+                  to="/mars"
+                  className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto"
+                >
                   Explore <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
               </div>
             </motion.div>
           </motion.div>
@@ -183,9 +193,12 @@ export default function Properties() {
                 <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Film</span>
                 <h3 className="text-2xl font-bold font-headline mb-2 text-on-surface">Scattered Thrones</h3>
                 <p className="text-on-surface-variant text-base mb-6 max-w-md">Documentary and narrative film production rooted in Black stories and Pacific Northwest history.</p>
-                <button type="button" className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto">
+                <Link
+                  to="/scattered-thrones"
+                  className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto"
+                >
                   Explore <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
               </div>
             </motion.div>
           </motion.div>
@@ -216,9 +229,14 @@ export default function Properties() {
                 <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Heritage</span>
                 <h3 className="text-2xl font-bold font-headline mb-2 text-on-surface">NW Black Pioneers</h3>
                 <p className="text-on-surface-variant text-base mb-6 max-w-md">Preserving and amplifying the history of Black communities across the Pacific Northwest.</p>
-                <button type="button" className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto">
+                <a
+                  href="https://northwestblackpioneers.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary font-bold font-headline uppercase tracking-widest text-sm hover:gap-4 transition-all pointer-events-auto"
+                >
                   Explore <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
             </motion.div>
           </motion.div>
