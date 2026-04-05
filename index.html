@@ -7,6 +7,16 @@
 <meta name="description" content="Afrofuturist multimedia studio. Five worlds. One studio. Seattle." />
   </head>
   <body>
+    <!-- Static form for Netlify Forms detection at build time (mirrors React contact form). -->
+    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <!-- Honeypot field name must match data-netlify-honeypot; keep out of sight for users. -->
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

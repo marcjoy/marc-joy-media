@@ -1,10 +1,6 @@
 import { motion } from 'motion/react';
 import { ExternalLink } from 'lucide-react';
 import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
-import {
-  ElfsightInstagramFeed,
-  ELF_INSTAGRAM_FEED_PRIMARY,
-} from '../components/ElfsightInstagramFeed';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
 type ClientProject = {
@@ -51,7 +47,8 @@ const clients: ClientProject[] = [
 ];
 
 function ClientCard({ project }: { project: ClientProject }) {
-  const isPlaceholder = project.url === '#';
+  const hasLiveUrl = Boolean(project.url && project.url !== '#');
+  const isPlaceholder = !hasLiveUrl;
 
   return (
     <article className="flex flex-col overflow-hidden rounded-lg border border-white/5 border-l-2 bg-zinc-900 [border-left-color:var(--page-accent)] md:flex-row md:items-stretch">
@@ -85,16 +82,21 @@ function ClientCard({ project }: { project: ClientProject }) {
               </span>
             ))}
           </div>
-          <a
-            href={project.url}
-            target={isPlaceholder ? undefined : '_blank'}
-            rel={isPlaceholder ? undefined : 'noopener noreferrer'}
-            onClick={isPlaceholder ? (e) => e.preventDefault() : undefined}
-            className="inline-flex items-center gap-2 font-headline text-sm font-bold uppercase tracking-widest text-primary transition-all hover:gap-3"
-          >
-            {isPlaceholder ? 'Link coming soon' : 'Visit site'}
-            <ExternalLink className="h-4 w-4 shrink-0 opacity-90" aria-hidden />
-          </a>
+          {hasLiveUrl ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-headline text-sm font-bold uppercase tracking-widest text-primary transition-all hover:gap-3"
+            >
+              Visit site
+              <ExternalLink className="h-4 w-4 shrink-0 opacity-90" aria-hidden />
+            </a>
+          ) : (
+            <span className="inline-flex items-center font-headline text-sm font-bold uppercase tracking-widest text-primary opacity-50 cursor-not-allowed select-none">
+              Coming Soon
+            </span>
+          )}
         </div>
       </div>
     </article>
@@ -151,8 +153,6 @@ export default function Work() {
           </motion.div>
         </motion.section>
       </div>
-
-      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PRIMARY} />
 
       <ElfsightAppointmentBooking />
     </motion.div>

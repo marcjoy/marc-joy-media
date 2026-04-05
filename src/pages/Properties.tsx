@@ -2,10 +2,6 @@ import { useState, type MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import {
-  ElfsightInstagramFeed,
-  ELF_INSTAGRAM_FEED_PORTFOLIO,
-} from '../components/ElfsightInstagramFeed';
 import { siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
@@ -206,8 +202,6 @@ export default function Properties() {
           </motion.div>
         </motion.section>
       </div>
-
-      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PORTFOLIO} ariaLabel="Instagram feed" />
     </motion.div>
   );
 }

@@ -1,16 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import type { FormEvent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { MapPin } from 'lucide-react';
 import { siteImages } from '../lib/images';
+import { streamingLinks } from '../data/sonicCosmos';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
 const FORMSUBMIT_EMAIL = 'marcjoy@marcjoy.com';
-const FORM_SUBMIT_ACTION = `https://formsubmit.co/${FORMSUBMIT_EMAIL}`;
-const FORM_NEXT_URL = 'https://marcjoy.com/about#contact';
 
 export default function About() {
+  const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as never).toString(),
+      });
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
+  };
 
   useEffect(() => {
     if (location.hash !== '#contact') return;
@@ -109,78 +126,91 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-16">
             <div className="md:col-span-3">
-              <form action={FORM_SUBMIT_ACTION} method="POST" className="space-y-6">
-                <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value={FORM_NEXT_URL} />
-
-                <div>
-                  <label htmlFor="name" className="block text-[#F5F0E8] text-sm font-medium mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors"
-                    placeholder="Your name"
-                  />
+              {submitted ? (
+                <div className="text-center py-12">
+                  <p className="text-[--page-accent] text-lg font-medium">Message received.</p>
+                  <p className="text-zinc-400 mt-2">I&apos;ll be in touch.</p>
                 </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-[#F5F0E8] text-sm font-medium mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors"
-                    placeholder="you@email.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-[#F5F0E8] text-sm font-medium mb-2">
-                    What&apos;s this about?
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors appearance-none"
-                  >
-                    <option value="Client Work">Client Work</option>
-                    <option value="Collaboration">Collaboration</option>
-                    <option value="Kemetopolis">Kemetopolis</option>
-                    <option value="Music">Music / Blaq Timbre</option>
-                    <option value="Speaking">Speaking / Press</option>
-                    <option value="Other">Something Else</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-[#F5F0E8] text-sm font-medium mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors resize-none"
-                    placeholder="Tell me what you're thinking..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="bg-[#2DD4BF] text-[#0A0A0F] font-headline font-bold px-8 py-3 rounded-lg hover:bg-[#2DD4BF]/90 transition-colors text-sm tracking-wide"
+              ) : (
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  className="space-y-6"
+                  onSubmit={handleSubmit}
                 >
-                  SEND IT
-                </button>
-              </form>
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="bot-field" />
+
+                  <div>
+                    <label htmlFor="name" className="block text-[#F5F0E8] text-sm font-medium mb-2">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors"
+                      placeholder="Your name"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-[#F5F0E8] text-sm font-medium mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors"
+                      placeholder="you@email.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="subject" className="block text-[#F5F0E8] text-sm font-medium mb-2">
+                      What&apos;s this about?
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors appearance-none"
+                    >
+                      <option value="Client Work">Client Work</option>
+                      <option value="Collaboration">Collaboration</option>
+                      <option value="Kemetopolis">Kemetopolis</option>
+                      <option value="Music">Music / Blaq Timbre</option>
+                      <option value="Speaking">Speaking / Press</option>
+                      <option value="Other">Something Else</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-[#F5F0E8] text-sm font-medium mb-2">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors resize-none"
+                      placeholder="Tell me what you're thinking..."
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="bg-[#2DD4BF] text-[#0A0A0F] font-headline font-bold px-8 py-3 rounded-lg hover:bg-[#2DD4BF]/90 transition-colors text-sm tracking-wide"
+                  >
+                    SEND IT
+                  </button>
+                </form>
+              )}
             </div>
 
             <div className="md:col-span-2 space-y-10">
@@ -198,10 +228,10 @@ export default function About() {
                 <h3 className="text-[#F5F0E8] font-headline font-bold text-sm tracking-wide uppercase mb-3">Social</h3>
                 <div className="space-y-2">
                   <a
-                    href="https://instagram.com/dream_in_public"
+                    href="https://instagram.com/marcjoymedia"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-[#9CA3AF] hover:text-[#F5F0E8] transition-colors"
+                    className="block text-[#9CA3AF] hover:text-[--page-accent] transition-colors"
                   >
                     Instagram
                   </a>
@@ -209,15 +239,15 @@ export default function About() {
                     href="https://youtube.com/@marcjoymedia"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-[#9CA3AF] hover:text-[#F5F0E8] transition-colors"
+                    className="block text-[#9CA3AF] hover:text-[--page-accent] transition-colors"
                   >
                     YouTube
                   </a>
                   <a
-                    href="https://open.spotify.com/search/blaq%20timbre"
+                    href={streamingLinks.spotify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-[#9CA3AF] hover:text-[#F5F0E8] transition-colors"
+                    className="block text-[#9CA3AF] hover:text-[--page-accent] transition-colors"
                   >
                     Spotify
                   </a>

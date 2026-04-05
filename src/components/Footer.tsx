@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { streamingLinks } from '../data/sonicCosmos';
 
 export default function Footer() {
   return (
@@ -13,40 +14,38 @@ export default function Footer() {
             href="https://instagram.com/marcjoymedia"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-on-surface-variant hover:text-primary transition-colors"
+            className="text-on-surface-variant hover:text-[--page-accent] transition-colors"
           >
             Instagram
           </a>
           <a
-            href="https://open.spotify.com/search/Blaq%20Timbre"
+            href={streamingLinks.spotify}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-on-surface-variant hover:text-primary transition-colors"
+            className="text-on-surface-variant hover:text-[--page-accent] transition-colors"
           >
             Spotify
           </a>
           <a
-            href="https://www.youtube.com/@MarcJoyMedia"
+            href="https://youtube.com/@marcjoymedia"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-on-surface-variant hover:text-primary transition-colors"
+            className="text-on-surface-variant hover:text-[--page-accent] transition-colors"
           >
             YouTube
           </a>
           <Link
             to="/magazine"
-            className="text-on-surface-variant hover:text-primary transition-colors"
+            className="text-on-surface-variant hover:text-[--page-accent] transition-colors"
           >
             Magazine
           </Link>
-          <a
-            href="https://afrofuturisticdreams.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-on-surface-variant hover:text-primary transition-colors"
+          <Link
+            to="/shop"
+            className="text-on-surface-variant hover:text-[--page-accent] transition-colors"
           >
             Shop
-          </a>
+          </Link>
         </div>
         <div className="flex items-center gap-4">
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
