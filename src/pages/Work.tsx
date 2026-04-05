@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
 import { cn } from '../lib/utils';
 import { siteImages } from '../lib/images';
 import { sectionReveal } from '../lib/motion';
@@ -103,6 +104,8 @@ export default function Work() {
           ))}
         </motion.div>
       </motion.section>
+
+      <ElfsightAppointmentBooking />
     </motion.div>
   );
 }

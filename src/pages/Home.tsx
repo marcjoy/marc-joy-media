@@ -4,6 +4,8 @@ import type { MotionValue } from 'motion/react';
 import { useScroll, useTransform, motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import HeroVideoCarousel from '../components/HeroVideoCarousel';
+import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
+import { ensureElfsightPlatform } from '../lib/elfsight';
 import { heroVideos, siteImages } from '../lib/images';
 import { sectionReveal } from '../lib/motion';
 
@@ -94,13 +96,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const id = 'elfsight-platform-js';
-    if (document.getElementById(id)) return;
-    const script = document.createElement('script');
-    script.id = id;
-    script.src = 'https://elfsightcdn.com/platform.js';
-    script.async = true;
-    document.body.appendChild(script);
+    ensureElfsightPlatform();
   }, []);
 
   return (
@@ -251,6 +247,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <ElfsightAppointmentBooking />
     </motion.div>
   );
 }
