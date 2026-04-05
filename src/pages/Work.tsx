@@ -1,42 +1,105 @@
 import { motion } from 'motion/react';
+import { ExternalLink } from 'lucide-react';
 import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
 import {
   ElfsightInstagramFeed,
   ELF_INSTAGRAM_FEED_PRIMARY,
 } from '../components/ElfsightInstagramFeed';
-import { cn } from '../lib/utils';
-import { siteImages } from '../lib/images';
-import { sectionReveal } from '../lib/motion';
+import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
-const gridVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
+type ClientProject = {
+  label: string;
+  name: string;
+  description: string;
+  url: string;
+  tags: string[];
+  image?: string;
+  imageAlt?: string;
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.55,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
+const clients: ClientProject[] = [
+  {
+    label: 'CLIENT / NONPROFIT',
+    name: 'Northwest Black Pioneers',
+    description:
+      "Digital presence, social content strategy, and historical narrative for Seattle's premier Black history organization. Ongoing.",
+    url: 'https://northwestblackpioneers.com',
+    tags: ['Content Strategy', 'Social Media', 'Web'],
+    image: '/clients/northwest-black-pioneers-logo.png',
+    imageAlt: 'Northwest Black Pioneers logo',
   },
-};
+  {
+    label: 'CLIENT / EDUCATION',
+    name: 'MARS Early Learning Academy',
+    description:
+      'Brand identity, weekly content series, and community engagement for a Seattle early learning center.',
+    url: 'https://www.marsearlylearningacademy.org/',
+    tags: ['Brand Identity', 'Content', 'Education'],
+    image: '/clients/mars-early-learning-logo.png',
+    imageAlt: 'MARS Early Learning Academy logo',
+  },
+  {
+    label: 'CLIENT / NONPROFIT',
+    name: 'Rainier Beach Community Resource Center',
+    description:
+      'Webflow site build and content architecture for a grant-funded community organization in Rainier Beach, Seattle.',
+    url: 'https://www.rbcrc.org/',
+    tags: ['Web Development', 'Webflow', 'Community'],
+    image: '/clients/rainier-beach-crc-logo.png',
+    imageAlt: 'Rainier Beach Community Resource Center logo',
+  },
+];
 
-const projectAspects = ['aspect-[4/5]', 'aspect-square', 'aspect-[3/4]', 'aspect-[4/3]', 'aspect-[2/3]', 'aspect-[4/5]'] as const;
+function ClientCard({ project }: { project: ClientProject }) {
+  const isPlaceholder = project.url === '#';
 
-const projects = siteImages.workItems.map((item, i) => ({
-  title: item.title,
-  cat: item.cat,
-  img: item.img,
-  aspect: projectAspects[i % projectAspects.length],
-}));
+  return (
+    <article className="flex flex-col overflow-hidden rounded-lg border border-white/5 border-l-2 bg-zinc-900 [border-left-color:var(--page-accent)] md:flex-row md:items-stretch">
+      {project.image ? (
+        <div className="box-border flex h-[200px] w-full shrink-0 items-center justify-center border-b border-white/5 bg-white p-6 md:w-[280px] md:border-b-0 md:border-r md:border-white/5">
+          <img
+            src={project.image}
+            alt={project.imageAlt ?? ''}
+            className="max-h-full max-w-full object-contain"
+          />
+        </div>
+      ) : null}
+      <div className="flex flex-1 flex-col gap-4 p-6 md:p-8">
+        <div>
+          <p className="text-on-surface-variant font-headline text-[10px] font-normal uppercase tracking-[0.2em] md:text-xs">
+            {project.label}
+          </p>
+          <h2 className="mt-2 font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
+            {project.name}
+          </h2>
+        </div>
+        <p className="text-on-surface-variant font-body text-base leading-relaxed">{project.description}</p>
+        <div className="mt-auto flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-white/10 bg-black/30 px-3 py-1 font-headline text-[10px] font-bold uppercase tracking-wider text-on-surface-variant"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <a
+            href={project.url}
+            target={isPlaceholder ? undefined : '_blank'}
+            rel={isPlaceholder ? undefined : 'noopener noreferrer'}
+            onClick={isPlaceholder ? (e) => e.preventDefault() : undefined}
+            className="inline-flex items-center gap-2 font-headline text-sm font-bold uppercase tracking-widest text-primary transition-all hover:gap-3"
+          >
+            {isPlaceholder ? 'Link coming soon' : 'Visit site'}
+            <ExternalLink className="h-4 w-4 shrink-0 opacity-90" aria-hidden />
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function Work() {
   return (
@@ -47,68 +110,46 @@ export default function Work() {
       exit={{ opacity: 0 }}
       className="pb-32"
     >
-      <div className="pt-32 px-8 max-w-[1440px] mx-auto">
-      <motion.section
-        className="mb-20"
-        initial={sectionReveal.initial}
-        whileInView={sectionReveal.whileInView}
-        viewport={sectionReveal.viewport}
-        transition={sectionReveal.transition}
-      >
-        <h1 className="text-[80px] md:text-[120px] font-headline font-bold tracking-tighter text-on-surface leading-none mb-12">
-          Work
-        </h1>
-        <div className="flex flex-wrap gap-4 items-center">
-          {['All', 'Branding', 'Web', 'Content', 'Film'].map((cat, i) => (
-            <button
-              key={cat}
-              type="button"
-              className={cn(
-                'px-6 py-2 rounded-full font-headline font-bold text-sm uppercase transition-all',
-                i === 0 ? 'bg-primary-container text-on-primary-container' : 'bg-surface-container text-on-surface-variant hover:text-primary'
-              )}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section
-        initial={sectionReveal.initial}
-        whileInView={sectionReveal.whileInView}
-        viewport={sectionReveal.viewport}
-        transition={sectionReveal.transition}
-      >
-        <motion.div
-          variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
+      <div className="mx-auto max-w-3xl px-8 pt-48 md:max-w-4xl lg:max-w-5xl">
+        <motion.section
+          className="mb-16 md:mb-20"
+          initial={sectionReveal.initial}
+          whileInView={sectionReveal.whileInView}
+          viewport={sectionReveal.viewport}
+          transition={sectionReveal.transition}
         >
-          {projects.map((proj) => (
-            <motion.div
-              key={proj.title}
-              variants={itemVariants}
-              className="group relative overflow-hidden rounded-xl bg-surface-container-low transition-all duration-500 hover:scale-[1.02] cursor-pointer break-inside-avoid mb-6"
-            >
-              <img src={proj.img} alt={proj.title} className={cn('w-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700', proj.aspect)} />
-              <motion.div
-                whileHover={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="absolute inset-0 bg-black/30 flex items-end p-4 z-10"
-              >
-                <div className="w-full">
-                  <p className="text-primary font-headline text-xs tracking-widest uppercase mb-2">{proj.cat}</p>
-                  <h3 className="text-2xl font-headline font-bold text-white leading-tight">{proj.title}</h3>
-                </div>
+          <h1 className="mb-6 max-w-4xl font-headline text-5xl font-black leading-none tracking-tighter text-on-surface md:text-7xl md:text-[80px]">
+            THE WORK
+          </h1>
+          <p className="mb-4 max-w-xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
+            Client partnerships and studio services.
+          </p>
+          <p className="max-w-2xl font-body text-base leading-relaxed text-on-surface-variant/90 md:text-lg">
+            Marc Joy Media partners with mission-driven organizations to build their digital presence, content strategy,
+            and visual identity.
+          </p>
+        </motion.section>
+
+        <motion.section
+          initial={sectionReveal.initial}
+          whileInView={sectionReveal.whileInView}
+          viewport={sectionReveal.viewport}
+          transition={sectionReveal.transition}
+        >
+          <motion.div
+            className="flex flex-col gap-6"
+            variants={staggerContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={staggerViewport}
+          >
+            {clients.map((project) => (
+              <motion.div key={project.name} variants={staggerCardVariants}>
+                <ClientCard project={project} />
               </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.section>
+            ))}
+          </motion.div>
+        </motion.section>
       </div>
 
       <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PRIMARY} />

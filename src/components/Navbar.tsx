@@ -35,7 +35,7 @@ export default function Navbar() {
       </Link>
       <div className="hidden md:flex items-center gap-10">
         <NavLink to="/properties" className={navLinkClass}>
-          Portfolio
+          Worlds
         </NavLink>
         <NavLink to="/kemetopolis" className={navLinkClass}>
           Kemetopolis

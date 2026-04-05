@@ -158,11 +158,11 @@ export default function Home() {
       >
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h3 className="text-on-surface-variant font-headline font-bold uppercase tracking-widest text-sm mb-4">The Portfolio</h3>
-            <h2 className="text-5xl font-black font-headline tracking-tighter text-on-surface">CULTURAL ASSETS</h2>
+            <h3 className="text-on-surface-variant font-headline font-bold uppercase tracking-widest text-sm mb-4">The Worlds</h3>
+            <h2 className="text-5xl font-black font-headline tracking-tighter text-on-surface">OWNED UNIVERSES</h2>
           </div>
           <p className="max-w-md text-on-surface-variant font-body text-lg leading-relaxed opacity-80">
-            A curation of intellectual properties spanning cosmic animation, sonic architecture, and digital history.
+            Original Marc Joy Media properties—fiction, culture platforms, and film—from one studio frequency.
           </p>
         </div>
         <motion.div
@@ -170,9 +170,9 @@ export default function Home() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-6 min-h-[1200px]"
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 min-h-[720px]"
         >
-          <motion.div variants={cardVariants} className="md:col-span-8 relative rounded-xl overflow-hidden group">
+          <motion.div variants={cardVariants} className="md:col-span-8 md:row-span-2 relative rounded-xl overflow-hidden group min-h-[360px]">
             <img src={siteImages.propertyKemetopolis} alt="Kemetopolis" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-10 flex flex-col items-start w-full">
@@ -184,31 +184,19 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
-          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
-            <img src={siteImages.propertyMarsAcademy} alt="Mars Academy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-            <div className="absolute inset-0 bento-card-gradient" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Education</span>
-              <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">MARS Early Learning</h3>
-              <p className="text-on-surface-variant font-body text-sm mb-4">Afrofuturist early childhood education for the youngest dreamers, ages 3 through 7.</p>
-              <Link to="/mars" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
-                Explore <ArrowRight className="w-4 h-4 -rotate-45" />
-              </Link>
-            </div>
-          </motion.div>
-          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
-            <img src={siteImages.propertyNeverOneMonth} alt="NeverOneMonth" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group min-h-[320px]">
+            <img src={siteImages.propertyNeverOneMonth} alt="NeverOneMonth / NileGen" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Culture</span>
-              <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">NeverOneMonth</h3>
+              <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">NeverOneMonth / NileGen</h3>
               <p className="text-on-surface-variant font-body text-sm mb-4">365 days of Black history, culture, and future. Because it was never just one month.</p>
               <Link to="/neveronemonth" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
                 Explore <ArrowRight className="w-4 h-4 -rotate-45" />
               </Link>
             </div>
           </motion.div>
-          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
+          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group min-h-[320px]">
             <img src={siteImages.propertyScatteredThrones} alt="Scattered Thrones" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
             <div className="absolute inset-0 bento-card-gradient" />
             <div className="absolute bottom-0 left-0 p-8">
@@ -220,24 +208,20 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
-          <motion.div variants={cardVariants} className="md:col-span-4 relative rounded-xl overflow-hidden group">
-            <img src={siteImages.propertyNWBP} alt="NW Black Pioneers" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
-            <div className="absolute inset-0 bento-card-gradient" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Heritage</span>
-              <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">NW Black Pioneers</h3>
-              <p className="text-on-surface-variant font-body text-sm mb-4">Preserving and amplifying the history of Black communities across the Pacific Northwest.</p>
-              <a
-                href="https://northwestblackpioneers.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all"
-              >
-                Explore <ArrowRight className="w-4 h-4 -rotate-45" />
-              </a>
-            </div>
-          </motion.div>
         </motion.div>
+
+        <div className="mt-16 max-w-xl border-t border-white/10 pt-12">
+          <h3 className="text-on-surface-variant font-headline font-bold uppercase tracking-widest text-sm mb-3">Studio work</h3>
+          <p className="text-on-surface-variant font-body text-base leading-relaxed mb-6 opacity-90">
+            Partnerships with mission-driven organizations—digital presence, content, and identity. Separate from the owned universes above.
+          </p>
+          <Link
+            to="/work"
+            className="inline-flex items-center gap-2 text-primary font-headline font-bold uppercase text-sm tracking-widest hover:gap-3 transition-all"
+          >
+            See the work <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </motion.section>
 
       <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PRIMARY} />
