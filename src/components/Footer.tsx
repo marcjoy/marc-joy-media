@@ -8,7 +8,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-wrap justify-center gap-8 font-body text-sm tracking-wide uppercase">
           <a
-            href="https://www.instagram.com/dream_in_public/"
+            href="https://www.instagram.com/marcjoymedia/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-on-surface-variant hover:text-primary transition-colors"

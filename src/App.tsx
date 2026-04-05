@@ -11,6 +11,7 @@ import Properties from './pages/Properties';
 import Work from './pages/Work';
 import Music from './pages/Music';
 import About from './pages/About';
+import Magazine from './pages/Magazine';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -26,7 +27,14 @@ function ScrollToTop() {
 function dataPageFromPath(pathname: string): string {
   if (pathname === '/' || pathname === '') return 'home';
   const seg = pathname.split('/').filter(Boolean)[0];
-  if (seg === 'kemetopolis' || seg === 'properties' || seg === 'work' || seg === 'music' || seg === 'about') {
+  if (
+    seg === 'kemetopolis' ||
+    seg === 'properties' ||
+    seg === 'work' ||
+    seg === 'music' ||
+    seg === 'about' ||
+    seg === 'magazine'
+  ) {
     return seg;
   }
   return 'home';
@@ -46,6 +54,7 @@ function AnimatedRoutes() {
           <Route path="/work" element={<Work />} />
           <Route path="/music" element={<Music />} />
           <Route path="/about" element={<About />} />
+          <Route path="/magazine" element={<Magazine />} />
         </Routes>
       </>
     </AnimatePresence>

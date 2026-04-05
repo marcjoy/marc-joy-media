@@ -59,14 +59,9 @@ export default function Navbar() {
         <NavLink to="/work" className={navLinkClass}>
           Work
         </NavLink>
-        <a
-          href="https://dreaminpublic.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-headline font-bold tracking-tighter uppercase transition-all duration-300 text-sm text-on-surface opacity-80 hover:opacity-100 hover:text-primary-container"
-        >
-          Magazine (Coming Soon)
-        </a>
+        <NavLink to="/magazine" className={navLinkClass}>
+          Magazine
+        </NavLink>
         <a
           href="https://afrofuturisticdreams.com"
           target="_blank"

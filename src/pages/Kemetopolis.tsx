@@ -3,7 +3,7 @@ import { useScroll, useTransform, motion } from 'motion/react';
 import { images, siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
-/** Phase 2A Cosmic Kids canon. Portraits from R2 via siteImages. Order: Kofi → 8Bit → Soliloquy → Zamani → Anyanwu Ama → Mjenzi. */
+/** Phase 2A Cosmic Kids canon. Portraits from R2 via siteImages. Grid row-major: Kofi → 8Bit → Soliloquy | Zamani → Anyanwu Ama → Mjenzi (3×2 on lg). */
 const cosmicKids = [
   { name: 'Kofi', role: 'Protagonist / Griot & Narrator', img: siteImages.charKofi },
   { name: '8Bit', role: 'Data & Code Manipulation', img: siteImages.char8Bit },
@@ -170,7 +170,7 @@ export default function Kemetopolis() {
           <h2 className="font-headline font-bold text-4xl text-on-surface uppercase tracking-tight mb-2">The Cosmic Kids</h2>
           <div className="h-1 w-24 bg-primary-container" />
         </div>
-        <div className="flex gap-6 overflow-x-auto no-scrollbar pb-12 px-4 md:px-0">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 pb-12">
           {cosmicKids.map((char, index) => {
             const isHovered = hoveredCard === index;
             const glowBase =
@@ -203,9 +203,9 @@ export default function Kemetopolis() {
                 whileHover={{ scale: 1.02 }}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className="flex-none w-72 md:w-80 group cursor-pointer"
+                className="w-full min-w-0 group cursor-pointer"
               >
-                <div className="relative h-[480px] rounded-xl overflow-hidden mb-6 border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]">
+                <div className="relative h-[420px] sm:h-[460px] lg:h-[480px] w-full rounded-xl overflow-hidden border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)]">
                   <img
                     src={char.img}
                     alt={char.name}

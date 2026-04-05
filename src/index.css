@@ -155,6 +155,42 @@
   --page-ambient-position: top left;
 }
 
+[data-page="magazine"] {
+  --page-bg: #07060d;
+  --page-accent: #6ee7d8;
+  --page-ambient-color: rgba(110, 231, 216, 0.06);
+  --page-ambient-position: center;
+}
+
+@keyframes magazine-sheen {
+  0% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+  100% {
+    background-position: 0% 40%;
+  }
+}
+
+.magazine-coming-soon-base {
+  background-color: #07060d;
+  background-image: linear-gradient(
+      135deg,
+      #07060d 0%,
+      #120b18 22%,
+      #0a141c 45%,
+      #0f0a14 68%,
+      #070a12 100%
+    );
+  background-size: 200% 200%;
+}
+
+.magazine-coming-soon-sheen {
+  animation: magazine-sheen 20s ease-in-out infinite;
+}
+
 .page-ambient-glow {
   background: radial-gradient(
     ellipse at var(--page-ambient-position),
