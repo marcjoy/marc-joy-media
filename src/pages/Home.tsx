@@ -1,11 +1,15 @@
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import type { MotionValue } from 'motion/react';
 import { useScroll, useTransform, motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import HeroVideoCarousel from '../components/HeroVideoCarousel';
 import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
-import { ensureElfsightPlatform } from '../lib/elfsight';
+import {
+  ElfsightInstagramFeed,
+  ELF_INSTAGRAM_FEED_LEGACY,
+  ELF_INSTAGRAM_FEED_PRIMARY,
+} from '../components/ElfsightInstagramFeed';
 import { heroVideos, siteImages } from '../lib/images';
 import { sectionReveal } from '../lib/motion';
 
@@ -94,10 +98,6 @@ export default function Home() {
       },
     },
   };
-
-  useEffect(() => {
-    ensureElfsightPlatform();
-  }, []);
 
   return (
     <motion.div
@@ -241,17 +241,8 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      <section
-        className="py-16 md:py-24 px-8 md:px-24 bg-surface border-t border-white/5"
-        aria-label="Instagram feed"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div
-            className="elfsight-app-c73d3320-8b1e-4483-b148-876dbdaf023f"
-            data-elfsight-app-lazy=""
-          />
-        </div>
-      </section>
+      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PRIMARY} ariaLabel="Instagram feed" />
+      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_LEGACY} ariaLabel="Instagram gallery" />
 
       <ElfsightAppointmentBooking />
     </motion.div>

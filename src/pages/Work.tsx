@@ -1,5 +1,9 @@
 import { motion } from 'motion/react';
 import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
+import {
+  ElfsightInstagramFeed,
+  ELF_INSTAGRAM_FEED_PRIMARY,
+} from '../components/ElfsightInstagramFeed';
 import { cn } from '../lib/utils';
 import { siteImages } from '../lib/images';
 import { sectionReveal } from '../lib/motion';
@@ -41,8 +45,9 @@ export default function Work() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-32 pb-32 px-8 max-w-[1440px] mx-auto"
+      className="pb-32"
     >
+      <div className="pt-32 px-8 max-w-[1440px] mx-auto">
       <motion.section
         className="mb-20"
         initial={sectionReveal.initial}
@@ -104,6 +109,9 @@ export default function Work() {
           ))}
         </motion.div>
       </motion.section>
+      </div>
+
+      <ElfsightInstagramFeed embedClass={ELF_INSTAGRAM_FEED_PRIMARY} />
 
       <ElfsightAppointmentBooking />
     </motion.div>

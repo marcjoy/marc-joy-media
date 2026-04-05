@@ -52,9 +52,14 @@ export default function Navbar() {
         <NavLink to="/magazine" className={navLinkClass}>
           Magazine
         </NavLink>
-        <NavLink to="/shop" className={navLinkClass}>
+        <a
+          href="https://afrofuturisticdreams.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-headline font-bold tracking-tighter uppercase transition-all duration-300 text-sm text-on-surface opacity-80 hover:opacity-100 hover:text-primary-container"
+        >
           Shop
-        </NavLink>
+        </a>
       </div>
       <a
         href="mailto:marcus@marcjoy.com"

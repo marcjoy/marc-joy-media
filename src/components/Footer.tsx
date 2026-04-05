@@ -39,12 +39,14 @@ export default function Footer() {
           >
             Magazine
           </Link>
-          <Link
-            to="/shop"
+          <a
+            href="https://afrofuturisticdreams.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
             Shop
-          </Link>
+          </a>
         </div>
         <div className="flex items-center gap-4">
           <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
