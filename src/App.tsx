@@ -3,8 +3,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { SoundGate } from './components/SoundGate';
-import { AudioControl } from './components/AudioControl';
 import Home from './pages/Home';
 import Kemetopolis from './pages/Kemetopolis';
 import Properties from './pages/Properties';
@@ -80,9 +78,6 @@ export default function App() {
       </main>
 
       <Footer />
-
-      <SoundGate />
-      <AudioControl />
     </div>
   );
 }

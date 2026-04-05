@@ -142,11 +142,6 @@ export const heroVideos = [
   'https://pub-ade018e64c784701882dc1419e597561.r2.dev/hero/Sailboat_moving_through_202603221739.mp4',
 ];
 
-/** Site-wide ambient loop. WAV is large uncompressed — prefer MP3/OGG in production (e.g. ffmpeg). */
-export const siteAudio = {
-  ambient: `${R2}/hero/NightDreams.wav`,
-};
-
 // ===== RECOMMENDED ASSIGNMENTS =====
 // Use these as the primary images for each site section.
 // Review and adjust after seeing them on the live site.
@@ -159,8 +154,8 @@ export const siteImages = {
   // Property cards on home page
   propertyKemetopolis: images.properties.kemetopolisCard,
   propertyNeverOneMonth: images.properties.kemetopolisCoin,
-  propertyMarsAcademy: images.properties.marsWebpage,
-  propertyNWBP: images.properties.nwbpWebpage,
+  propertyMarsAcademy: images.properties.marsAcademy,
+  propertyNWBP: images.properties.nwbpImage,
   propertyScatteredThrones: images.properties.skaterGirl,
 
   // Kemetopolis page characters

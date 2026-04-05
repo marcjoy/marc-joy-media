@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
   return (
     <footer className="bg-surface-container-lowest w-full py-12 px-8 border-t border-white/5">
@@ -31,14 +33,12 @@ export default function Footer() {
           >
             YouTube
           </a>
-          <a
-            href="https://dreaminpublic.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/magazine"
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
-            Magazine (Coming Soon)
-          </a>
+            Magazine
+          </Link>
           <a
             href="https://afrofuturisticdreams.com"
             target="_blank"
