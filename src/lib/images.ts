@@ -99,7 +99,7 @@ export const images = {
 
   // ===== MUSIC =====
   music: {
-    sonicCosmosCover: `${R2}/music/sonic-cosmos-cover.png`,
+    sonicCosmosCover: '/music/sonic-cosmos-cover.png',
   },
 
   // ===== ABOUT =====
