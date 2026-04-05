@@ -5,8 +5,8 @@ import { siteImages } from '../lib/images';
 import { streamingLinks } from '../data/sonicCosmos';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
-// TODO: Replace ALBUM_ID with actual Spotify album ID from open.spotify.com/album/[ID]
-const SONIC_COSMOS_SPOTIFY_ALBUM_EMBED_ID = 'ALBUM_ID';
+/** Spotify album id for Sonic Cosmos (open.spotify.com/album/6SUr5bWftlm7nhlfsC5h9B). */
+const SONIC_COSMOS_SPOTIFY_ALBUM_EMBED_ID = '6SUr5bWftlm7nhlfsC5h9B';
 
 const streamingButtons = [
   { label: 'Spotify', href: streamingLinks.spotify },
