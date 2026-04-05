@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useScroll, useTransform, motion } from 'motion/react';
+import {
+  ElfsightInstagramFeed,
+  ELF_INSTAGRAM_FEED_PRIMARY,
+} from '../components/ElfsightInstagramFeed';
 import { images, siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
@@ -83,9 +87,10 @@ export default function Kemetopolis() {
 
   const midOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.6, 0.6, 0]);
 
-  const fgOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0, 1]);
-  /* Include scroll 0 → blur 0 so the layer is not stuck at 8px when progress is below 0.4. */
-  const fgBlur = useTransform(scrollYProgress, [0, 0.4, 1], [0, 8, 0]);
+  /* Overlap detail layer with title fade (title ends ~0.35). Old [0→0.5] at 0 left a long empty band. */
+  const fgOpacity = useTransform(scrollYProgress, [0, 0.14, 0.4, 1], [0, 0, 1, 1]);
+  /* Blur peaks while crossfading orbit → detail, aligned to fgOpacity ramp. */
+  const fgBlur = useTransform(scrollYProgress, [0, 0.12, 0.35, 0.52, 1], [0, 6, 8, 0, 0]);
   const fgBlurFilter = useTransform(fgBlur, (v) =>
     v > 0.02 ? `blur(${v.toFixed(2)}px)` : 'none',
   );
@@ -108,7 +113,7 @@ export default function Kemetopolis() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <section ref={heroRef} className="relative h-[200vh] overflow-hidden">
+      <section ref={heroRef} className="relative h-[155vh] overflow-hidden">
         <div className="sticky top-0 h-screen overflow-hidden">
           <motion.div
             style={{ scale: bgScale, filter: bgBlurFilter, willChange: 'auto' }}
@@ -158,6 +163,11 @@ export default function Kemetopolis() {
           </motion.div>
         </div>
       </section>
+
+      <ElfsightInstagramFeed
+        embedClass={ELF_INSTAGRAM_FEED_PRIMARY}
+        ariaLabel="Marc Joy Media Instagram feed"
+      />
 
       <motion.section
         className="py-24 md:py-32 px-8 overflow-hidden bg-surface-container-lowest"
