@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Marc Joy Media
 
-# Run and deploy your AI Studio app
+**We Dream in Public.** Afrofuturist multimedia studio (Seattle) — Kemetopolis, Sonic Cosmos, portfolio, and more.
 
-This contains everything you need to run your app locally.
+**Site:** [marcjoy.com](https://marcjoy.com)
 
-View your app in AI Studio: https://ai.studio/apps/925ca73d-2d02-4097-9918-8b5a51e0acca
+## Stack
 
-## Run Locally
+React 19, Vite, TypeScript, Tailwind CSS v4, Motion, React Router.
 
-**Prerequisites:**  Node.js
+## Run locally
 
+**Prerequisites:** Node.js 20+
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
+```
+
+Opens the dev server (see terminal for URL; default port is **3000**).
+
+## Build
+
+```bash
+npm run lint
+npm run build
+npm run preview
+```
+
+## Deploy
+
+Configured for **Netlify** (`netlify.toml` — SPA fallback to `index.html`). Connect the repo and use the default build command `npm run build`, publish directory `dist`.
+
+## Env (optional)
+
+If you add Gemini-powered features, copy `.env.example` to `.env.local` and set `GEMINI_API_KEY`. The Vite config can expose it to the client where needed.
