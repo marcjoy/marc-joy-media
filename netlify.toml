@@ -1,6 +1,10 @@
 # Marc Joy Media — https://marcjoy.com
 # Afrofuturist multimedia studio · We Dream in Public
 
+[build]
+  command = "npm run build"
+  publish = "dist"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
