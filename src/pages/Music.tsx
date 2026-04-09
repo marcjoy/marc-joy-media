@@ -29,7 +29,7 @@ export default function Music() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="relative z-10 mx-auto max-w-7xl px-[clamp(1rem,5vw,2rem)] pt-32 pb-24"
+      className="relative z-10 mx-auto max-w-7xl px-[clamp(1rem,5vw,2rem)] pt-40 pb-24 md:pt-36 lg:pt-32"
     >
       <div className="fixed inset-0 z-0 music-pulse-bg pointer-events-none" aria-hidden />
       <div className="relative z-10">
@@ -61,14 +61,14 @@ export default function Music() {
                 Afrofuturist hip-hop, R&amp;B, and funk. Female vocals over cosmic production. A journey through deep
                 indigo rhythm and celestial harmony.
               </p>
-              <div className="flex flex-wrap gap-4 pt-4">
+              <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:flex-wrap sm:gap-4">
                 {streamingButtons.map(({ label, href }) => (
                   <a
                     key={label}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-primary-container text-on-primary-container px-5 py-3 rounded-lg font-bold hover:brightness-110 transition-all"
+                    className="flex min-h-11 items-center justify-center gap-3 rounded-lg bg-primary-container px-5 py-3 text-center text-on-primary-container font-bold transition-all hover:brightness-110 sm:min-h-0"
                   >
                     <MusicIcon className="w-5 h-5" />
                     <span>{label}</span>

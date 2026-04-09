@@ -47,7 +47,7 @@ export default function About() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="mx-auto max-w-7xl px-[clamp(1rem,5vw,2rem)] pt-32 py-32"
+      className="mx-auto max-w-7xl px-[clamp(1rem,5vw,2rem)] pt-40 pb-32 md:pt-36 lg:pt-32"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
         <motion.section
@@ -114,7 +114,7 @@ export default function About() {
 
       <section
         id="contact"
-        className="relative scroll-mt-28 py-24 px-6 md:px-12 lg:px-20"
+        className="relative scroll-mt-28 py-24 pl-[max(1.5rem,env(safe-area-inset-left,0px))] pr-[max(1.5rem,env(safe-area-inset-right,0px))] md:px-12 lg:px-20"
       >
         <div className="max-w-4xl mx-auto">
           <p className="text-[#2DD4BF] text-sm font-medium tracking-[0.2em] uppercase mb-4">Get in Touch</p>
@@ -154,7 +154,7 @@ export default function About() {
                       id="name"
                       name="name"
                       required
-                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors"
+                      className="w-full rounded-lg border border-[#2a2a35] bg-[#1f1f27] px-4 py-3 text-base text-[#F5F0E8] placeholder-[#6b7280] transition-colors focus:border-[#2DD4BF] focus:outline-none focus:ring-1 focus:ring-[#2DD4BF]"
                       placeholder="Your name"
                     />
                   </div>
@@ -168,7 +168,7 @@ export default function About() {
                       id="email"
                       name="email"
                       required
-                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors"
+                      className="w-full rounded-lg border border-[#2a2a35] bg-[#1f1f27] px-4 py-3 text-base text-[#F5F0E8] placeholder-[#6b7280] transition-colors focus:border-[#2DD4BF] focus:outline-none focus:ring-1 focus:ring-[#2DD4BF]"
                       placeholder="you@email.com"
                     />
                   </div>
@@ -180,7 +180,7 @@ export default function About() {
                     <select
                       id="subject"
                       name="subject"
-                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors appearance-none"
+                      className="w-full appearance-none rounded-lg border border-[#2a2a35] bg-[#1f1f27] px-4 py-3 text-base text-[#F5F0E8] transition-colors focus:border-[#2DD4BF] focus:outline-none focus:ring-1 focus:ring-[#2DD4BF]"
                     >
                       <option value="Client Work">Client Work</option>
                       <option value="Collaboration">Collaboration</option>
@@ -200,14 +200,14 @@ export default function About() {
                       name="message"
                       required
                       rows={5}
-                      className="w-full bg-[#1f1f27] border border-[#2a2a35] rounded-lg px-4 py-3 text-[#F5F0E8] placeholder-[#6b7280] focus:outline-none focus:border-[#2DD4BF] focus:ring-1 focus:ring-[#2DD4BF] transition-colors resize-none"
+                      className="w-full resize-none rounded-lg border border-[#2a2a35] bg-[#1f1f27] px-4 py-3 text-base text-[#F5F0E8] placeholder-[#6b7280] transition-colors focus:border-[#2DD4BF] focus:outline-none focus:ring-1 focus:ring-[#2DD4BF]"
                       placeholder="Tell me what you're thinking..."
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="bg-[#2DD4BF] text-[#0A0A0F] font-headline font-bold px-8 py-3 rounded-lg hover:bg-[#2DD4BF]/90 transition-colors text-sm tracking-wide"
+                    className="min-h-11 rounded-lg bg-[#2DD4BF] px-8 py-3 font-headline text-sm font-bold tracking-wide text-[#0A0A0F] transition-colors hover:bg-[#2DD4BF]/90"
                   >
                     SEND IT
                   </button>

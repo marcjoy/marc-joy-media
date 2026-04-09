@@ -11,7 +11,7 @@ export function ElfsightAppointmentBooking() {
 
   return (
     <section
-      className="border-t border-white/5 bg-surface-container-lowest px-[clamp(1rem,5vw,2rem)] py-16 md:px-24 md:py-24"
+      className="border-t border-white/5 bg-surface-container-lowest px-[clamp(1rem,5vw,2rem)] py-12 pb-10 md:px-24 md:py-16 md:pb-12"
       aria-label="Book an appointment"
     >
       <div className="max-w-7xl mx-auto">

@@ -52,7 +52,10 @@ export default function Navbar() {
     <>
       <nav
         className={cn(
-          'fixed top-0 w-full z-50 flex justify-between items-center px-[clamp(1rem,4vw,2rem)] py-6 transition-colors duration-500 gap-4',
+          'fixed top-0 w-full z-50 flex justify-between items-center gap-4 pb-6 transition-colors duration-500',
+          'pt-[max(1.5rem,env(safe-area-inset-top,0px))]',
+          'pl-[max(clamp(1rem,4vw,2rem),env(safe-area-inset-left,0px))]',
+          'pr-[max(clamp(1rem,4vw,2rem),env(safe-area-inset-right,0px))]',
           scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-transparent'
         )}
       >
@@ -130,7 +133,7 @@ export default function Navbar() {
       {menuOpen ? (
         <div
           id="mobile-primary-nav"
-          className="fixed inset-0 z-40 bg-background/98 backdrop-blur-md md:hidden pt-[5.75rem] px-[clamp(1rem,4vw,2rem)] pb-10 overflow-y-auto"
+          className="fixed inset-0 z-40 bg-background/98 backdrop-blur-md md:hidden overflow-y-auto pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-[max(5.75rem,calc(4.25rem+env(safe-area-inset-top,0px)))] pl-[max(clamp(1rem,4vw,2rem),env(safe-area-inset-left,0px))] pr-[max(clamp(1rem,4vw,2rem),env(safe-area-inset-right,0px))]"
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"

@@ -205,3 +205,58 @@
   inset: 0;
   z-index: 0;
 }
+
+/* BackgroundGradientAnimation (components/ui/background-gradient-animation.tsx) */
+@keyframes k-bg-move-vertical {
+  0%,
+  100% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+}
+
+@keyframes k-bg-move-in-circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes k-bg-move-horizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+.k-bg-grad-first {
+  animation: k-bg-move-vertical 30s ease infinite;
+}
+
+.k-bg-grad-second {
+  animation: k-bg-move-in-circle 20s reverse infinite;
+}
+
+.k-bg-grad-third {
+  animation: k-bg-move-in-circle 40s linear infinite;
+}
+
+.k-bg-grad-fourth {
+  animation: k-bg-move-horizontal 40s ease infinite;
+}
+
+.k-bg-grad-fifth {
+  animation: k-bg-move-in-circle 20s ease infinite;
+}

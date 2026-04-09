@@ -25,7 +25,7 @@ export function ElfsightInstagramFeed({
 
   return (
     <section
-      className="border-t border-white/5 bg-surface px-[clamp(1rem,5vw,2rem)] py-16 md:px-24 md:py-24"
+      className="border-t border-white/5 bg-surface px-[clamp(1rem,5vw,2rem)] py-12 md:px-24 md:py-16"
       aria-label={ariaLabel}
     >
       <div className="max-w-7xl mx-auto">

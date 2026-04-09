@@ -1,7 +1,7 @@
 // R2 Image URLs for marcjoy.com
 // Base: https://pub-ade018e64c784701882dc1419e597561.r2.dev
 
-const R2 = 'https://pub-ade018e64c784701882dc1419e597561.r2.dev';
+export const R2 = 'https://pub-ade018e64c784701882dc1419e597561.r2.dev';
 
 export const images = {
   // ===== HERO =====
@@ -15,33 +15,30 @@ export const images = {
     heroCityscapeOpenart: `${R2}/hero/hero-cityscape-openart.jpg`,
     deskEcosystemV1: `${R2}/hero/desk-planetary-ecosystem-v1.png`,
     deskEcosystemV2: `${R2}/hero/desk-planetary-ecosystem-v2.png`,
+    /** Home cinematic scrollytelling: 148 frames hero-frame 1.webp … hero-frame 148.webp (R2: hero/main-page-hero-scroll/) */
+    heroPageFramesBase: `${R2}/hero/main-page-hero-scroll`,
+    /** Poster / fallback for Kemetopolis hero video and character page video loading states */
+    ogImage: `${R2}/hero/og-image.jpg`,
   },
 
   // ===== HERO VIDEOS =====
   heroVideo: {
     video1126: `${R2}/hero/hero-video-1126.mp4`,
     videoLatest: `${R2}/hero/hero-video-latest.mp4`,
+    /** Kofi character page — Ancient Doorway / portal */
+    sailboatPortal: `${R2}/hero/Sailboat_moving_through_202603221739.mp4`,
   },
 
-  // ===== KEMETOPOLIS CHARACTERS (Cosmic Kids portraits) =====
-  // Stored under R2 brand/ (not kemetopolis/). Full absolute URLs per public bucket layout.
+  // ===== KEMETOPOLIS CHARACTERS (Cosmic Kids + Archive — kemetopolis/ on R2) =====
   characters: {
-    kofi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/kofi-portrait.png',
-    mjenzi: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/mjenzi-portrait.png',
-    eightBit: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/8bit-portrait.png',
-    soliloquy: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/soliloquy-portrait.png',
-    zamani: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/zamani-portrait.png',
-    anyanwuAma: 'https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/anyanwu-ama-portrait.png',
+    kofi: `${R2}/kemetopolis/kofi-portrait.jpg`,
+    mjenzi: `${R2}/kemetopolis/mjenzi-portrait.jpg`,
+    eightBit: `${R2}/kemetopolis/8bit-portrait.jpg`,
+    soliloquy: `${R2}/kemetopolis/soliloquy-portrait.jpg`,
+    zamani: `${R2}/kemetopolis/zamani-portrait.jpg`,
+    anyanwuAma: `${R2}/kemetopolis/anyanwu-portrait.jpg`,
+    nanaOshi: `${R2}/kemetopolis/nana-oshi-portrait.jpg`,
   },
-  /*
-   * Verification — Cosmic Kids portraits (brand/ on R2):
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/kofi-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/mjenzi-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/8bit-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/soliloquy-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/zamani-portrait.png
-   * https://pub-ade018e64c784701882dc1419e597561.r2.dev/brand/anyanwu-ama-portrait.png
-   */
 
   // ===== KEMETOPOLIS WORLD =====
   world: {
@@ -54,6 +51,13 @@ export const images = {
     scene1020: `${R2}/kemetopolis/scene-1020.png`,
     /** Kemetopolis page hero (orbit layer) — use ≥2560px wide source for sharp full-width / retina. */
     scene1226: `${R2}/kemetopolis/scene-1226.png`,
+    /** Kemetopolis page hero primary still (dual-sun orbital). */
+    twoSunOrbital: `${R2}/kemetopolis/two-sun-orbital.jpg`,
+    ntruFire: `${R2}/kemetopolis/ntru-fire.jpg`,
+    ntruWater: `${R2}/kemetopolis/ntru-water.jpg`,
+    ntruAir: `${R2}/kemetopolis/ntru-air.jpg`,
+    ntruEarth: `${R2}/kemetopolis/ntru-earth.jpg`,
+    ntruLightning: `${R2}/kemetopolis/ntru-lightning.jpg`,
     unknown01: `${R2}/kemetopolis/unknown-01.png`,
     unknown02: `${R2}/kemetopolis/unknown-02.png`,
     unknown03: `${R2}/kemetopolis/unknown-03.png`,
@@ -165,6 +169,7 @@ export const siteImages = {
   charSoliloquy: images.characters.soliloquy,
   charZamani: images.characters.zamani,
   charAnyanwuAma: images.characters.anyanwuAma,
+  charNanaOshi: images.characters.nanaOshi,
 
   // Kemetopolis world section
   worldImage: images.world.scene1226,

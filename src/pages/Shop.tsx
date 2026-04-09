@@ -11,7 +11,7 @@ export default function Shop() {
   return (
     <div
       data-page="shop"
-      className="min-h-screen flex flex-col items-center justify-center px-8 pt-48 pb-32 bg-background"
+      className="flex min-h-screen flex-col items-center justify-center bg-background pb-[max(8rem,env(safe-area-inset-bottom,0px))] pl-[max(2rem,env(safe-area-inset-left,0px))] pr-[max(2rem,env(safe-area-inset-right,0px))] pt-48"
     >
       <p className="font-body text-on-surface-variant text-center">Redirecting to the shop…</p>
     </div>

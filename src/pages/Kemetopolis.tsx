@@ -1,25 +1,101 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
+import type { MotionValue } from 'motion/react';
 import { useScroll, useTransform, motion } from 'motion/react';
-import {
-  ElfsightInstagramFeed,
-  ELF_INSTAGRAM_FEED_PRIMARY,
-} from '../components/ElfsightInstagramFeed';
+import { KemetopolisCharacterNavLink } from '@/components/KemetopolisCharacterNavLink';
+import { CosmicKidsSphereExplorer } from '@/components/CosmicKidsSphereExplorer';
+import type { ImageData } from '@/components/ui/img-sphere';
+import NtruArtsSelector from '../components/NtruArtsSelector';
+import type { KemetopolisSlug } from '@/data/kemetopolisCharacterDetails';
+import { kemetopolisCharacterBySlug } from '@/data/kemetopolisCharacterDetails';
 import { images, siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
 
-/** Phase 2A Cosmic Kids canon. Portraits from R2 via siteImages. Grid row-major: Kofi → 8Bit → Soliloquy | Zamani → Anyanwu Ama → Mjenzi (3×2 on lg). */
+const VINE_HEIGHTS_PX = [120, 180, 90, 150, 110] as const;
+
+const DESCENT_SPORES = [
+  { top: '15%', left: '20%', delay: 0, yEnd: -40 },
+  { top: '35%', left: '75%', delay: 0.4, yEnd: -80 },
+  { top: '55%', left: '40%', delay: 0.8, yEnd: -120 },
+  { top: '70%', left: '85%', delay: 1.2, yEnd: -40 },
+  { top: '25%', left: '55%', delay: 1.6, yEnd: -80 },
+  { top: '80%', left: '15%', delay: 2.0, yEnd: -120 },
+  { top: '45%', left: '65%', delay: 2.4, yEnd: -40 },
+  { top: '60%', left: '30%', delay: 2.8, yEnd: -80 },
+] as const;
+
+const LIVING_CITY_PILLS = [
+  'NILE RUN — Water District',
+  'CONGO DEEP — Forest District',
+  'BANTU SOUTH — Agricultural Backbone',
+  'GREAT RIFT — Geological Edge',
+] as const;
+
+function DescentSpore({
+  scrollProgress,
+  top,
+  left,
+  delayS,
+  yEndPx,
+}: {
+  scrollProgress: MotionValue<number>;
+  top: string;
+  left: string;
+  delayS: number;
+  yEndPx: number;
+}) {
+  const y = useTransform(scrollProgress, [0, 1], [0, yEndPx]);
+  return (
+    <motion.div
+      className="pointer-events-none absolute"
+      style={{ top, left, y }}
+    >
+      <span
+        className="kemetopolis-spore-pulse block h-1.5 w-1.5 rounded-full bg-teal-400/30"
+        style={{
+          boxShadow: '0 0 6px rgba(20,184,166,0.4)',
+          animationDelay: `${delayS}s`,
+        }}
+      />
+    </motion.div>
+  );
+}
+
+/** Phase 2A Cosmic Kids + Archive. Portraits from R2 kemetopolis/*.jpg via siteImages. */
 const cosmicKids = [
-  { name: 'Kofi', role: 'Protagonist / Griot & Narrator', img: siteImages.charKofi },
-  { name: '8Bit', role: 'Data & Code Manipulation', img: siteImages.char8Bit },
-  { name: 'Soliloquy', role: 'Story & Memory Arts', img: siteImages.charSoliloquy },
-  { name: 'Zamani', role: 'Temporal Manipulation', img: siteImages.charZamani },
-  { name: 'Anyanwu Ama', role: 'Solar Channeling', img: siteImages.charAnyanwuAma },
-  { name: 'Mjenzi', role: 'Tech Construction', img: siteImages.charMjenzi },
+  { name: 'Kofi', slug: 'kofi', role: 'Protagonist / Griot & Narrator', img: siteImages.charKofi },
+  { name: '8Bit', slug: '8bit', role: 'Data & Code Manipulation', img: siteImages.char8Bit },
+  { name: 'Soliloquy', slug: 'soliloquy', role: 'Story & Memory Arts', img: siteImages.charSoliloquy },
+  { name: 'Zamani', slug: 'zamani', role: 'Temporal Manipulation', img: siteImages.charZamani },
+  { name: 'Anyanwu Ama', slug: 'anyanwu-ama', role: 'Solar Channeling', img: siteImages.charAnyanwuAma },
+  { name: 'Mjenzi', slug: 'mjenzi', role: 'Tech Construction', img: siteImages.charMjenzi },
+  { name: 'Nana Oshi', slug: 'nana-oshi', role: 'The Archive — Keeper of What Survived', img: siteImages.charNanaOshi },
 ];
 
 const COSMIC_KIDS_8BIT_INDEX = cosmicKids.findIndex((c) => c.name === '8Bit');
 
-const kemetopolisHeroOrbit = images.world.scene1226;
+/** Repeated portraits fill the Fibonacci sphere; each node carries full Shetau profile for the modal. */
+const COSMIC_KIDS_SPHERE_IMAGES: ImageData[] = (() => {
+  const out: ImageData[] = [];
+  const repeats = 6;
+  for (let r = 0; r < repeats; r++) {
+    for (const c of cosmicKids) {
+      const slug = c.slug as KemetopolisSlug;
+      const detail = kemetopolisCharacterBySlug[slug];
+      out.push({
+        id: `${c.slug}-sphere-${r}`,
+        src: c.img,
+        alt: `${c.name} — Cosmic Kid portrait`,
+        title: detail.name,
+        description: detail.ability,
+        lore: [...detail.lore],
+        adinkra: detail.adinkra,
+        profileTo: `/kemetopolis/${c.slug}`,
+      });
+    }
+  }
+  return out;
+})();
+
 const kemetopolisHeroDetail = images.world.scene1020;
 
 /* Placeholders: images.ts has no dedicated Calibrated / Drift Collective art — swap when faction renders exist. */
@@ -49,6 +125,7 @@ const NTU_NAME_GLOW: Record<string, string> = {
   Soliloquy: '#6366F1',
   Zamani: '#D4A574',
   'Anyanwu Ama': '#E07A5F',
+  'Nana Oshi': '#FB7185',
 };
 
 /** Ntru Arts hover text color (matches glow); 8Bit uses alternating red/green in render. */
@@ -58,12 +135,21 @@ const NTU_NAME_HOVER_COLOR: Record<string, string> = {
   Soliloquy: '#6366F1',
   Zamani: '#D4A574',
   'Anyanwu Ama': '#E07A5F',
+  'Nana Oshi': '#FB7185',
 };
 
 export default function Kemetopolis() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [eightBitGlowGreen, setEightBitGlowGreen] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const prev = document.title;
+    document.title = 'Kemetopolis | Marc Joy Media';
+    return () => {
+      document.title = prev;
+    };
+  }, []);
 
   useEffect(() => {
     if (hoveredCard !== COSMIC_KIDS_8BIT_INDEX) {
@@ -98,6 +184,18 @@ export default function Kemetopolis() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.35], ['0%', '-8%']);
 
+  const natureRootsY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const natureVinesY = useTransform(scrollYProgress, [0, 1], [-20, 40]);
+  const natureVinesScaleY = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
+
+  const livingCityRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress: livingCityProgress } = useScroll({
+    target: livingCityRef,
+    offset: ['start start', 'end end'],
+  });
+  const livingCityBgScale = useTransform(livingCityProgress, [0, 1], [1.05, 1]);
+  const livingCityWaterOpacity = useTransform(livingCityProgress, [0, 0.5, 1], [0, 0.5, 0]);
+
   const factionsRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress: factionsProgress } = useScroll({
     target: factionsRef,
@@ -119,14 +217,16 @@ export default function Kemetopolis() {
             style={{ scale: bgScale, filter: bgBlurFilter, willChange: 'auto' }}
             className="absolute inset-0 origin-center"
           >
-            <img
-              src={kemetopolisHeroOrbit}
+            <video
               className="h-full w-full object-cover"
-              alt="Kemetopolis from orbit"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-              style={{ imageRendering: '-webkit-optimize-contrast' }}
+              src={images.heroVideo.videoLatest}
+              poster={images.hero.ogImage}
+              muted
+              playsInline
+              loop
+              autoPlay
+              preload="metadata"
+              aria-label="Kemetopolis city-planet skyline — Afrofuturist towers and terraces"
             />
           </motion.div>
 
@@ -137,7 +237,7 @@ export default function Kemetopolis() {
 
           <motion.div
             style={{ opacity: fgOpacity, filter: fgBlurFilter, willChange: 'auto' }}
-            className="absolute inset-0"
+            className="absolute inset-0 z-[1]"
           >
             <img
               src={kemetopolisHeroDetail}
@@ -149,6 +249,47 @@ export default function Kemetopolis() {
               style={{ imageRendering: '-webkit-optimize-contrast' }}
             />
           </motion.div>
+
+          <div className="pointer-events-none absolute inset-0 z-[5]">
+            <motion.div
+              style={{ y: natureRootsY }}
+              className="absolute bottom-0 left-0 h-64 w-64 md:h-96 md:w-96"
+            >
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
+                <path
+                  d="M100 200 C100 150, 60 120, 40 80 M100 200 C100 140, 140 110, 160 60 M100 200 C100 160, 80 130, 50 110 M100 200 C100 155, 120 125, 150 100 M40 80 C30 60, 20 50, 10 30 M160 60 C170 40, 185 25, 195 10"
+                  stroke="rgba(16,185,129,0.15)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </motion.div>
+            <motion.div
+              style={{ y: natureVinesY, scaleY: natureVinesScaleY }}
+              className="absolute right-8 top-0 flex origin-top gap-2 md:right-16"
+            >
+              {VINE_HEIGHTS_PX.map((h) => (
+                <div key={h} className="flex flex-col items-center">
+                  <div
+                    className="w-px bg-gradient-to-b from-emerald-400/20 to-transparent"
+                    style={{ height: h }}
+                  />
+                  <div className="h-2 w-2 shrink-0 rounded-full border border-emerald-400/20 bg-emerald-400/15" />
+                </div>
+              ))}
+            </motion.div>
+            {DESCENT_SPORES.map((s) => (
+              <Fragment key={`${s.top}-${s.left}`}>
+                <DescentSpore
+                  scrollProgress={scrollYProgress}
+                  top={s.top}
+                  left={s.left}
+                  delayS={s.delay}
+                  yEndPx={s.yEnd}
+                />
+              </Fragment>
+            ))}
+          </div>
 
           <motion.div
             style={{ opacity: contentOpacity, y: contentY }}
@@ -164,13 +305,125 @@ export default function Kemetopolis() {
         </div>
       </section>
 
-      <ElfsightInstagramFeed
-        embedClass={ELF_INSTAGRAM_FEED_PRIMARY}
-        ariaLabel="Marc Joy Media Instagram feed"
-      />
+      <section ref={livingCityRef} className="relative h-[200vh]">
+        <div className="sticky top-0 h-screen overflow-hidden bg-[#0a0a0f]">
+          <motion.div
+            style={{ scale: livingCityBgScale }}
+            className="absolute inset-0 origin-center"
+          >
+            <img
+              src={images.world.ntruEarth}
+              alt="Kemetopolis vertical cultivation and earthworks"
+              className="absolute inset-0 h-full w-full object-cover opacity-70"
+              loading="lazy"
+            />
+          </motion.div>
+          <motion.img
+            src={images.world.ntruWater}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ mixBlendMode: 'multiply', opacity: livingCityWaterOpacity }}
+            loading="lazy"
+          />
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to bottom, #0a0a0f 0%, transparent 20%, transparent 80%, #0a0a0f 100%)',
+            }}
+          />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0a0f] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0f] to-transparent" />
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
+            <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.5em] text-emerald-400/60">
+              THE LIVING CITY
+            </p>
+            <div className="flex flex-wrap justify-center gap-16 md:gap-24">
+              {(
+                [
+                  { n: '21', label: 'REGIONS', color: 'text-emerald-400' },
+                  { n: '744', label: 'BCE FOUNDED', color: 'text-teal-400' },
+                  { n: '2', label: 'SUNS', color: 'text-orange-400' },
+                ] as const
+              ).map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{
+                    duration: 0.55,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: i * 0.15,
+                  }}
+                  className="text-center"
+                >
+                  <p className={`font-headline text-4xl font-black md:text-6xl ${stat.color}`}>{stat.n}</p>
+                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
+            <p className="mt-16 max-w-xl font-serif text-base italic text-white/50 md:text-lg">
+              Where the stone remembers the seed.
+            </p>
+            <div className="mt-24 flex flex-wrap justify-center gap-3">
+              {LIVING_CITY_PILLS.map((label, i) => (
+                <motion.span
+                  key={label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: i * 0.08,
+                  }}
+                  className="rounded-full border border-emerald-400/15 bg-emerald-400/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400/40"
+                >
+                  {label}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <motion.section
-        className="py-24 md:py-32 px-8 overflow-hidden bg-surface-container-lowest"
+        className="py-20 md:py-28 overflow-hidden bg-surface-container-lowest"
+        initial={sectionReveal.initial}
+        whileInView={sectionReveal.whileInView}
+        viewport={sectionReveal.viewport}
+        transition={sectionReveal.transition}
+      >
+        <div className="max-w-7xl mx-auto px-8 mb-10">
+          <h2 className="font-headline font-bold text-3xl md:text-4xl text-on-surface uppercase tracking-tight mb-2">
+            The Ntru Arts
+          </h2>
+          <div className="h-1 w-24 bg-primary-container" />
+        </div>
+        <div className="w-full px-4 md:px-8">
+          <NtruArtsSelector />
+        </div>
+        <div className="relative mt-10 h-24 w-full overflow-hidden md:mt-14">
+          <svg
+            className="h-[96px] w-full"
+            viewBox="0 0 1920 96"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden
+          >
+            <path
+              d="M0,48 C200,20 400,76 600,48 S1000,20 1200,48 S1600,76 1920,48"
+              fill="none"
+              stroke="rgba(16,185,129,0.12)"
+              strokeWidth={1}
+            />
+          </svg>
+        </div>
+      </motion.section>
+
+      <motion.section
+        className="py-24 md:py-32 px-8 overflow-hidden bg-surface"
         initial={sectionReveal.initial}
         whileInView={sectionReveal.whileInView}
         viewport={sectionReveal.viewport}
@@ -179,7 +432,33 @@ export default function Kemetopolis() {
         <div className="max-w-7xl mx-auto mb-16">
           <h2 className="font-headline font-bold text-4xl text-on-surface uppercase tracking-tight mb-2">The Cosmic Kids</h2>
           <div className="h-1 w-24 bg-primary-container" />
+          <p className="mt-10 text-center font-mono text-[10px] uppercase tracking-[0.45em] text-teal-400/70">
+            SHETAU HALL
+          </p>
+          <div className="relative mx-auto mb-8 mt-6 h-16 w-16 rounded-full border border-teal-400/20">
+            {[0, 45, 90, 135].map((deg) => (
+              <div
+                key={deg}
+                className="absolute left-1/2 w-px bg-teal-400/15"
+                style={{
+                  top: '50%',
+                  height: 24,
+                  marginTop: -24,
+                  transformOrigin: '50% 100%',
+                  transform: `translateX(-50%) rotate(${deg}deg)`,
+                }}
+              />
+            ))}
+            <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-400/20" />
+          </div>
+          <p className="mx-auto max-w-2xl text-center text-on-surface-variant text-sm leading-relaxed md:text-base">
+            The archive holds what the city chose to keep: names, faces, and the quiet proof that Kemetopolis remembers its own.
+          </p>
         </div>
+        <p className="mx-auto mb-2 max-w-2xl px-4 text-center font-mono text-[10px] uppercase tracking-[0.35em] text-on-surface-variant/80">
+          Drag the sphere — tap a portrait to read more
+        </p>
+        <CosmicKidsSphereExplorer images={COSMIC_KIDS_SPHERE_IMAGES} />
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 pb-12">
           {cosmicKids.map((char, index) => {
             const isHovered = hoveredCard === index;
@@ -213,29 +492,34 @@ export default function Kemetopolis() {
                 whileHover={{ scale: 1.02 }}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className="w-full min-w-0 group cursor-pointer"
+                className={`w-full min-w-0 group ${index === cosmicKids.length - 1 ? 'lg:col-start-2' : ''}`}
               >
-                <div className="relative h-[clamp(22rem,72vw,30rem)] w-full overflow-hidden rounded-xl border border-white/5 transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)] sm:h-[clamp(24rem,68vw,30rem)] lg:h-[30rem]">
-                  <img
-                    src={char.img}
-                    alt={char.name}
-                    className="h-full w-full object-cover object-top grayscale transition-all duration-500 group-hover:grayscale-0"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
-                  <div className="absolute bottom-6 left-6">
-                    <h3
-                      className="mb-1 font-headline text-2xl font-bold text-on-surface transition-all duration-300"
-                      style={{
-                        textShadow: nameShadow,
-                        ...(nameHoverColor ? { color: nameHoverColor } : {}),
-                      }}
-                    >
-                      {char.name}
-                    </h3>
-                    <p className="text-on-surface-variant font-medium tracking-wide">{char.role}</p>
+                <KemetopolisCharacterNavLink
+                  slug={char.slug}
+                  className="block w-full cursor-pointer no-underline outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl"
+                >
+                  <div className="relative h-[clamp(22rem,72vw,30rem)] w-full overflow-hidden rounded-xl border border-white/5 bg-black transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_30px_rgba(45,212,191,0.15)] group-hover:brightness-[1.03] sm:h-[clamp(24rem,68vw,30rem)] lg:h-[30rem]">
+                    <img
+                      src={char.img}
+                      alt={char.name}
+                      className="h-full w-full object-contain object-top grayscale transition-all duration-500 group-hover:grayscale-0"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
+                    <div className="absolute bottom-6 left-6">
+                      <h3
+                        className="mb-1 font-headline text-2xl font-bold text-on-surface transition-all duration-300"
+                        style={{
+                          textShadow: nameShadow,
+                          ...(nameHoverColor ? { color: nameHoverColor } : {}),
+                        }}
+                      >
+                        {char.name}
+                      </h3>
+                      <p className="text-on-surface-variant font-medium tracking-wide">{char.role}</p>
+                    </div>
                   </div>
-                </div>
+                </KemetopolisCharacterNavLink>
               </motion.div>
             );
           })}
@@ -320,6 +604,16 @@ export default function Kemetopolis() {
           </motion.div>
         </motion.div>
       </motion.section>
+
+      <style>{`
+        @keyframes kemetopolisSporePulse {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.4); }
+        }
+        .kemetopolis-spore-pulse {
+          animation: kemetopolisSporePulse 3s ease-in-out infinite;
+        }
+      `}</style>
     </motion.div>
   );
 }

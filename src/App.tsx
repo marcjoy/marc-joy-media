@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { readKemetopolisScrollRestore } from './lib/kemetopolisScrollRestore';
 import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Kemetopolis from './pages/Kemetopolis';
+import KemetopolisCharacter from './pages/KemetopolisCharacter';
 import Properties from './pages/Properties';
 import Work from './pages/Work';
 import Music from './pages/Music';
@@ -22,15 +24,26 @@ function ScrollToTop() {
     if (location.pathname === '/about' && location.hash === '#contact') {
       return;
     }
+    const restoreY = readKemetopolisScrollRestore(location.state);
+    if (location.pathname === '/kemetopolis' && restoreY !== undefined) {
+      const y = Math.max(0, restoreY);
+      requestAnimationFrame(() => {
+        window.scrollTo(0, y);
+      });
+      return;
+    }
     window.scrollTo(0, 0);
-  }, [location.pathname, location.hash]);
+  }, [location.pathname, location.hash, location.state]);
   return null;
 }
 
 function dataPageFromPath(pathname: string): string {
   const parts = pathname.split('/').filter(Boolean);
   if (parts.length === 0) return 'home';
-  if (parts.length > 1) return 'not-found';
+  if (parts.length > 1) {
+    if (parts[0] === 'kemetopolis' && parts.length === 2) return 'kemetopolis';
+    return 'not-found';
+  }
   const seg = parts[0];
   if (
     seg === 'kemetopolis' ||
@@ -59,6 +72,7 @@ function AnimatedRoutes() {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/kemetopolis" element={<Kemetopolis />} />
+          <Route path="/kemetopolis/:slug" element={<KemetopolisCharacter />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/work" element={<Work />} />
           <Route path="/music" element={<Music />} />
@@ -80,7 +94,7 @@ export default function App() {
   const dataPage = dataPageFromPath(location.pathname);
 
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <div className="grain-overlay" />
 
       <div className="ambient-glow fixed top-[-10%] left-[-10%] h-[clamp(16rem,42vw,31.25rem)] w-[clamp(16rem,42vw,31.25rem)] rounded-full bg-tertiary" />
@@ -89,7 +103,7 @@ export default function App() {
       <ScrollToTop />
       <Navbar />
 
-      <main data-page={dataPage}>
+      <main data-page={dataPage} className="flex w-full min-w-0 flex-1 flex-col">
         <AnimatedRoutes />
       </main>
 

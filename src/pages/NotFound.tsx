@@ -8,9 +8,9 @@ export default function NotFound() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen flex flex-col items-center justify-center px-8 pt-32 pb-24"
+      className="flex min-h-screen flex-col items-center justify-center pb-24 pl-[max(2rem,env(safe-area-inset-left,0px))] pr-[max(2rem,env(safe-area-inset-right,0px))] pt-40"
     >
-      <h1 className="font-headline text-4xl md:text-6xl font-black tracking-tighter text-on-surface uppercase mb-4 text-center">
+      <h1 className="mb-4 text-center font-headline text-[clamp(1.75rem,6vw+0.5rem,3.75rem)] font-black uppercase tracking-tighter text-on-surface text-balance md:text-6xl">
         Page Not Found
       </h1>
       <p className="font-body text-on-surface-variant text-center max-w-md mb-10">
@@ -18,7 +18,7 @@ export default function NotFound() {
       </p>
       <Link
         to="/"
-        className="font-headline font-bold uppercase tracking-widest text-sm text-primary hover:text-primary-container transition-colors"
+        className="inline-flex min-h-11 items-center font-headline text-sm font-bold uppercase tracking-widest text-primary transition-colors hover:text-primary-container"
       >
         ← Back to home
       </Link>

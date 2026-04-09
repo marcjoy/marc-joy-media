@@ -52,7 +52,7 @@ export default function Magazine() {
         <p className="mb-4 font-headline text-xs font-bold uppercase tracking-[0.45em] text-primary-container/90">
           Dream in Public
         </p>
-        <h1 className="font-headline text-5xl font-black tracking-tighter text-on-surface sm:text-6xl md:text-7xl mb-6">
+        <h1 className="mb-6 text-balance text-center font-headline text-5xl font-black tracking-tighter text-on-surface sm:text-6xl md:text-7xl">
           COMING SOON
         </h1>
         <p className="font-body text-on-surface-variant text-lg md:text-xl leading-relaxed opacity-90">

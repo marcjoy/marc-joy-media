@@ -87,7 +87,7 @@ function ClientCard({ project }: { project: ClientProject }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-headline text-sm font-bold uppercase tracking-widest text-primary transition-all hover:gap-3"
+              className="inline-flex min-h-11 items-center gap-2 font-headline text-sm font-bold uppercase tracking-widest text-primary transition-all hover:gap-3 sm:min-h-0"
             >
               Visit site
               <ExternalLink className="h-4 w-4 shrink-0 opacity-90" aria-hidden />
