@@ -8,6 +8,8 @@ gsap.registerPlugin(ScrollToPlugin);
 const TOTAL_FRAMES = 148;
 const ZOOM_FACTOR = 1.0;
 const SCROLL_HEIGHT_VH = 500;
+/** Below this width, hero is one viewport tall — no scroll-through scrub (mobile). */
+const MOBILE_CINEMATIC_MQ = '(max-width: 767px)';
 /** Scroll starts at the last frame — load it first so the hero can appear immediately. */
 const INITIAL_FRAME_INDEX = TOTAL_FRAMES - 1;
 /** After this many ms, drop the blocking overlay so the rest of the site is usable. */
@@ -78,6 +80,17 @@ export default function CinematicScrollytelling() {
   const [activeSection, setActiveSection] = useState<OverlaySection | null>(null);
   const [devFrameDisplay, setDevFrameDisplay] = useState(1);
   const lastDevFrameRef = useRef(0);
+  const [isMobileCinematic, setIsMobileCinematic] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia(MOBILE_CINEMATIC_MQ).matches : false,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_CINEMATIC_MQ);
+    const onChange = () => setIsMobileCinematic(mq.matches);
+    onChange();
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
 
   const drawFrame = useCallback((index: number) => {
     const canvas = canvasRef.current;
@@ -201,6 +214,13 @@ export default function CinematicScrollytelling() {
   useEffect(() => {
     if (!heroReady) return;
     handleResize();
+    if (isMobileCinematic) {
+      currentFrameRef.current = INITIAL_FRAME_INDEX;
+      targetFrameRef.current = INITIAL_FRAME_INDEX;
+      drawFrame(INITIAL_FRAME_INDEX);
+      setActiveSection(OVERLAY_SECTIONS[OVERLAY_SECTIONS.length - 1] ?? null);
+      return;
+    }
     const container = containerRef.current;
     if (container) {
       const fraction = scrollFractionInSection(container);
@@ -211,10 +231,21 @@ export default function CinematicScrollytelling() {
     } else {
       drawFrame(0);
     }
-  }, [heroReady, handleResize, drawFrame]);
+  }, [heroReady, handleResize, drawFrame, isMobileCinematic]);
 
   useEffect(() => {
     if (!heroReady) return;
+
+    if (isMobileCinematic) {
+      const onResize = () => {
+        handleResize();
+        currentFrameRef.current = INITIAL_FRAME_INDEX;
+        targetFrameRef.current = INITIAL_FRAME_INDEX;
+        drawFrame(INITIAL_FRAME_INDEX);
+      };
+      window.addEventListener('resize', onResize);
+      return () => window.removeEventListener('resize', onResize);
+    }
 
     const onScroll = () => {
       const container = containerRef.current;
@@ -281,7 +312,7 @@ export default function CinematicScrollytelling() {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [heroReady, drawFrame, handleResize]);
+  }, [heroReady, drawFrame, handleResize, isMobileCinematic]);
 
   const scrollToTop = () => {
     gsap.to(window, { scrollTo: { y: 0 }, duration: 1.4, ease: 'power3.inOut' });
@@ -293,7 +324,9 @@ export default function CinematicScrollytelling() {
     <div
       ref={containerRef}
       className="relative bg-black"
-      style={{ height: `${SCROLL_HEIGHT_VH}vh` }}
+      style={{
+        height: isMobileCinematic ? '100svh' : `${SCROLL_HEIGHT_VH}vh`,
+      }}
     >
       {!heroReady && (
         <div
@@ -378,7 +411,7 @@ export default function CinematicScrollytelling() {
           </div>
         )}
 
-        {heroReady && (
+        {heroReady && !isMobileCinematic && (
           <button
             type="button"
             onClick={scrollToTop}
