@@ -98,10 +98,6 @@ const COSMIC_KIDS_SPHERE_IMAGES: ImageData[] = (() => {
 
 const kemetopolisHeroDetail = images.world.scene1020;
 
-/* Placeholders: images.ts has no dedicated Calibrated / Drift Collective art — swap when faction renders exist. */
-const factionImageDriftCollective = images.world.microScaleAction;
-const factionImageCalibrated = images.world.microScaleLearning;
-
 const cardVariants = (index: number) => ({
   hidden: {
     opacity: 0,
@@ -201,8 +197,9 @@ export default function Kemetopolis() {
     target: factionsRef,
     offset: ['start 0.7', 'end 0.3'],
   });
-  const hustlersOpacity = useTransform(factionsProgress, [0, 0.5, 1], [1, 0.5, 0]);
-  const buildersOpacity = useTransform(factionsProgress, [0, 0.5, 1], [0, 0.5, 1]);
+  /* Narrow handoff so captions do not sit at 50/50 opacity on top of each other */
+  const hustlersOpacity = useTransform(factionsProgress, [0, 0.45, 0.55, 1], [1, 1, 0, 0]);
+  const buildersOpacity = useTransform(factionsProgress, [0, 0.45, 0.55, 1], [0, 0, 1, 1]);
 
   return (
     <motion.div
@@ -220,7 +217,7 @@ export default function Kemetopolis() {
             <video
               className="h-full w-full object-cover"
               src={images.heroVideo.videoLatest}
-              poster={images.hero.ogImage}
+              poster={images.world.twoSunOrbital}
               muted
               playsInline
               loop
@@ -543,17 +540,12 @@ export default function Kemetopolis() {
         >
           <motion.div variants={staggerCardVariants} className="relative">
             <div className="relative h-[60vh] overflow-hidden rounded-xl border border-white/5">
-              <motion.img
-                src={factionImageDriftCollective}
-                style={{ opacity: hustlersOpacity }}
-                className="absolute inset-0 w-full h-full object-cover"
-                alt="The Drift Collective"
-              />
-              <motion.img
-                src={factionImageCalibrated}
-                style={{ opacity: buildersOpacity }}
-                className="absolute inset-0 w-full h-full object-cover"
-                alt="The Calibrated"
+              <img
+                src={images.world.buildHustle}
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                alt="Kemetopolis — Calibrated builders and Drift Collective at work"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-background/25 to-transparent pointer-events-none z-[1]" />
               <div className="absolute inset-0 flex items-end p-8 z-10 pointer-events-none">

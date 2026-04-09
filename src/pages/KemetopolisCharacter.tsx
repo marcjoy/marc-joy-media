@@ -86,7 +86,7 @@ export default function KemetopolisCharacter() {
             <video
               className="absolute inset-0 h-full w-full object-contain object-center"
               src={heroVideo}
-              poster={images.hero.ogImage}
+              poster={image}
               muted
               playsInline
               loop

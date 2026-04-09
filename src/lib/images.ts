@@ -17,7 +17,7 @@ export const images = {
     deskEcosystemV2: `${R2}/hero/desk-planetary-ecosystem-v2.png`,
     /** Home cinematic scrollytelling: 148 frames hero-frame 1.webp … hero-frame 148.webp (R2: hero/main-page-hero-scroll/) */
     heroPageFramesBase: `${R2}/hero/main-page-hero-scroll`,
-    /** Poster / fallback for Kemetopolis hero video and character page video loading states */
+    /** Site-wide social preview (index.html og/twitter); not used as Kemetopolis video poster */
     ogImage: `${R2}/hero/og-image.jpg`,
   },
 
@@ -47,6 +47,8 @@ export const images = {
     wizardLabV5: `${R2}/kemetopolis/wizard-lab-v5.png`,
     microScaleAction: `${R2}/kemetopolis/micro-scale-action.png`,
     microScaleLearning: `${R2}/kemetopolis/micro-scale-learning.png`,
+    /** Factions / World section — Builders & Hustlers hero art */
+    buildHustle: `${R2}/kemetopolis/build-hustle.webp`,
     /** Kemetopolis page hero (detail layer) — use ≥2560px wide source for sharp full-width / retina. */
     scene1020: `${R2}/kemetopolis/scene-1020.png`,
     /** Kemetopolis page hero (orbit layer) — use ≥2560px wide source for sharp full-width / retina. */
