@@ -115,7 +115,7 @@ export default function Home() {
             </h1>
           </div>
           <Link
-            to="/properties"
+            to="/worlds"
             className="group flex w-full md:w-auto shrink-0 items-center justify-center gap-4 bg-primary-container px-8 py-5 font-headline text-xl font-black uppercase tracking-tighter text-on-primary-container shadow-[0_0_40px_rgba(45,212,191,0.25)] transition-all duration-500 hover:bg-primary md:inline-flex md:justify-start md:px-10"
           >
             Enter the World
@@ -184,7 +184,7 @@ export default function Home() {
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Culture</span>
               <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">NeverOneMonth / NileGen</h3>
               <p className="text-on-surface-variant font-body text-sm mb-4">365 days of Black history, culture, and future. Because it was never just one month.</p>
-              <Link to="/neveronemonth" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
+              <Link to="/worlds/neveronemonth" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
                 Explore <ArrowRight className="w-4 h-4 -rotate-45" />
               </Link>
             </div>
@@ -196,7 +196,7 @@ export default function Home() {
               <span className="bg-primary/20 backdrop-blur-md text-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-3 inline-block border border-primary/30">Film</span>
               <h3 className="text-2xl font-bold font-headline text-on-surface mb-1 uppercase">Scattered Thrones</h3>
               <p className="text-on-surface-variant font-body text-sm mb-4">Documentary and narrative film production rooted in Black stories and Pacific Northwest history.</p>
-              <Link to="/scattered-thrones" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
+              <Link to="/worlds/scattered-thrones" className="flex items-center gap-2 text-primary font-bold uppercase text-xs tracking-widest hover:gap-4 transition-all">
                 Explore <ArrowRight className="w-4 h-4 -rotate-45" />
               </Link>
             </div>

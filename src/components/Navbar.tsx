@@ -66,7 +66,7 @@ export default function Navbar() {
           MARC JOY
         </Link>
         <div className="hidden md:flex items-center gap-10">
-          <NavLink to="/properties" className={navLinkClass}>
+          <NavLink to="/worlds" className={navLinkClass}>
             Worlds
           </NavLink>
           <NavLink to="/kemetopolis" className={navLinkClass}>
@@ -139,7 +139,7 @@ export default function Navbar() {
           aria-label="Site navigation"
         >
           <nav className="flex flex-col" aria-label="Primary">
-            <NavLink to="/properties" className={mobileNavLinkClass} onClick={closeMenu}>
+            <NavLink to="/worlds" className={mobileNavLinkClass} onClick={closeMenu}>
               Worlds
             </NavLink>
             <NavLink to="/kemetopolis" className={mobileNavLinkClass} onClick={closeMenu}>

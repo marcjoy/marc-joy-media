@@ -130,7 +130,8 @@
   --page-ambient-position: center;
 }
 
-[data-page="properties"] {
+[data-page="worlds"],
+[data-page="world-detail"] {
   --page-bg: #0A0A0F;
   --page-accent: #2DD4BF;
   --page-ambient-color: rgba(45, 212, 191, 0.05);

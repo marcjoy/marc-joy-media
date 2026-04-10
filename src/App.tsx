@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { readKemetopolisScrollRestore } from './lib/kemetopolisScrollRestore';
 import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
@@ -7,15 +7,17 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Kemetopolis from './pages/Kemetopolis';
 import KemetopolisCharacter from './pages/KemetopolisCharacter';
-import Properties from './pages/Properties';
+import Worlds from './pages/Worlds';
+import WorldTheDepartment from './pages/worlds/WorldTheDepartment';
+import WorldDreamInPublic from './pages/worlds/WorldDreamInPublic';
+import WorldNeverOneMonth from './pages/worlds/WorldNeverOneMonth';
+import WorldScatteredThrones from './pages/worlds/WorldScatteredThrones';
 import Work from './pages/Work';
 import Music from './pages/Music';
 import About from './pages/About';
 import Magazine from './pages/Magazine';
 import Shop from './pages/Shop';
-import NeverOneMonth from './pages/NeverOneMonth';
 import Mars from './pages/Mars';
-import ScatteredThrones from './pages/ScatteredThrones';
 import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
@@ -42,20 +44,19 @@ function dataPageFromPath(pathname: string): string {
   if (parts.length === 0) return 'home';
   if (parts.length > 1) {
     if (parts[0] === 'kemetopolis' && parts.length === 2) return 'kemetopolis';
+    if (parts[0] === 'worlds') return 'world-detail';
     return 'not-found';
   }
   const seg = parts[0];
   if (
     seg === 'kemetopolis' ||
-    seg === 'properties' ||
+    seg === 'worlds' ||
     seg === 'work' ||
     seg === 'music' ||
     seg === 'about' ||
     seg === 'magazine' ||
     seg === 'shop' ||
-    seg === 'neveronemonth' ||
-    seg === 'mars' ||
-    seg === 'scattered-thrones'
+    seg === 'mars'
   ) {
     return seg;
   }
@@ -73,15 +74,21 @@ function AnimatedRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/kemetopolis" element={<Kemetopolis />} />
           <Route path="/kemetopolis/:slug" element={<KemetopolisCharacter />} />
-          <Route path="/properties" element={<Properties />} />
+          <Route path="/worlds" element={<Worlds />} />
+          <Route path="/worlds/the-department" element={<WorldTheDepartment />} />
+          <Route path="/worlds/dream-in-public" element={<WorldDreamInPublic />} />
+          <Route path="/worlds/neveronemonth" element={<WorldNeverOneMonth />} />
+          <Route path="/worlds/nilegen" element={<Navigate to="/worlds/neveronemonth" replace />} />
+          <Route path="/worlds/scattered-thrones" element={<WorldScatteredThrones />} />
+          <Route path="/properties" element={<Navigate to="/worlds" replace />} />
+          <Route path="/neveronemonth" element={<Navigate to="/worlds/neveronemonth" replace />} />
+          <Route path="/scattered-thrones" element={<Navigate to="/worlds/scattered-thrones" replace />} />
           <Route path="/work" element={<Work />} />
           <Route path="/music" element={<Music />} />
           <Route path="/about" element={<About />} />
           <Route path="/magazine" element={<Magazine />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/neveronemonth" element={<NeverOneMonth />} />
           <Route path="/mars" element={<Mars />} />
-          <Route path="/scattered-thrones" element={<ScatteredThrones />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </>
