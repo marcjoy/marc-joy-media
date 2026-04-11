@@ -103,6 +103,12 @@ export const images = {
     video01: `${R2}/work/work-video-01.mp4`,
   },
 
+  // ===== MAGAZINE =====
+  magazine: {
+    /** Magazine / Dream in Public — ALL view hero (lane strips below) */
+    allViewHero: `${R2}/Dream-in-Public/Afrofuturist_broadcast_control_202604102358.jpeg`,
+  },
+
   // ===== MUSIC =====
   music: {
     sonicCosmosCover: '/music/sonic-cosmos-cover.png',
@@ -191,4 +197,7 @@ export const siteImages = {
 
   // About page
   aboutPortrait: images.about.portraitV1,
+
+  // Magazine — Dream in Public
+  magazineAllViewHero: images.magazine.allViewHero,
 } as const;

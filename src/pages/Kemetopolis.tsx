@@ -179,7 +179,8 @@ export default function Kemetopolis() {
   );
 
   const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.35], ['0%', '-8%']);
+  /* Gentler lift so titles stay inside sticky overflow-hidden on narrow viewports */
+  const contentY = useTransform(scrollYProgress, [0, 0.35], ['0%', '-4%']);
 
   const natureRootsY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const natureVinesY = useTransform(scrollYProgress, [0, 1], [-20, 40]);
@@ -293,14 +294,16 @@ export default function Kemetopolis() {
 
           <motion.div
             style={{ opacity: contentOpacity, y: contentY }}
-            className="relative z-10 flex flex-col items-center justify-center h-full text-center px-8"
+            className="relative z-10 flex h-full w-full min-w-0 flex-col items-center justify-center px-4 pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] pt-[max(5.75rem,env(safe-area-inset-top,0px)+4.5rem)] text-center sm:px-6 sm:pb-8 sm:pt-[max(5.5rem,env(safe-area-inset-top,0px)+4rem)] md:px-10 md:pt-8"
           >
-            <h1 className="mb-4 font-headline text-[clamp(2.5rem,10vw+0.5rem,5rem)] font-black uppercase leading-none tracking-tighter text-on-surface drop-shadow-[0_0_15px_rgba(87,241,219,0.4)] md:text-[80px]">
-              KEMETOPOLIS
-            </h1>
-            <p className="font-body text-xl md:text-2xl text-on-surface-variant tracking-widest uppercase">
-              A City-Planet in the Atum-Ra System
-            </p>
+            <div className="w-full min-w-0 max-w-full sm:max-w-4xl">
+              <h1 className="mb-3 whitespace-nowrap break-normal px-0.5 font-body text-[clamp(1.2rem,min(4.25vw+0.95rem,1.9rem),1.9rem)] font-black uppercase leading-[1.12] tracking-[0.05em] text-on-surface drop-shadow-[0_0_15px_rgba(87,241,219,0.4)] sm:text-[clamp(1.3rem,min(4.75vw+1rem,2.1rem),2.1rem)] sm:tracking-[0.06em] md:mb-4 md:font-headline md:text-[clamp(2rem,min(8.5vw+0.35rem,5rem),5rem)] md:leading-[1.02] md:tracking-tighter lg:text-[80px]">
+                KEMETOPOLIS
+              </h1>
+              <p className="mx-auto max-w-full text-balance font-body text-sm uppercase leading-snug tracking-[0.14em] text-on-surface-variant sm:max-w-2xl sm:text-lg sm:tracking-[0.22em] md:text-2xl md:tracking-[0.28em] lg:tracking-widest">
+                A City-Planet in the Atum-Ra System
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>

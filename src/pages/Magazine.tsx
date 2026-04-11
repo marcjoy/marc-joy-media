@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import articlesData from '../data/magazine.json';
 import ArticleCard, { type MagazineArticle, type MagazineLane } from '../components/magazine/ArticleCard';
 import MagazineFilter from '../components/magazine/MagazineFilter';
+import { siteImages } from '../lib/images';
 
 const allArticles = articlesData as MagazineArticle[];
 
@@ -40,22 +41,6 @@ const LANE_CHANNEL_COLOR: Record<MagazineLane, string> = {
   PULSE: '#7F77DD',
 };
 
-const CHANNEL_PLACEHOLDER_BG: Record<MagazineLane, string> = {
-  SIGNAL: 'rgba(29,158,117,0.15)',
-  DREAM: 'rgba(216,90,48,0.15)',
-  PULSE: 'rgba(127,119,221,0.15)',
-};
-
-/** Last card in the first non-empty lane strip (same order as on-screen scroll rows). */
-function heroArticleFromStrips(byLane: Record<MagazineLane, MagazineArticle[]>): MagazineArticle | null {
-  for (const lane of LANES) {
-    const slice = byLane[lane].slice(0, 8);
-    if (slice.length === 0) continue;
-    return slice[slice.length - 1]!;
-  }
-  return null;
-}
-
 function isLaneFilter(f: string): f is MagazineLane {
   return f === 'SIGNAL' || f === 'DREAM' || f === 'PULSE';
 }
@@ -64,8 +49,6 @@ export default function Magazine() {
   const [filter, setFilter] = useState('ALL');
 
   const articlesByLane = useMemo(() => articlesByLaneFrom(allArticles), [allArticles]);
-
-  const allViewHeroArticle = useMemo(() => heroArticleFromStrips(articlesByLane), [articlesByLane]);
 
   const filteredFlat = useMemo(() => {
     if (filter === 'ALL') return sortByDateDesc(allArticles);
@@ -116,24 +99,19 @@ export default function Magazine() {
           </div>
         </header>
 
-        {filter === 'ALL' && allViewHeroArticle ? (
+        {filter === 'ALL' ? (
           <div className="mb-9 px-6">
             <div className="overflow-hidden rounded-[12px] border-[0.5px] border-white/[0.08]">
-              {allViewHeroArticle.imageUrl?.trim() ? (
+              <div className="relative aspect-[16/10] w-full sm:aspect-[2.35/1]">
                 <img
-                  src={allViewHeroArticle.imageUrl.trim()}
-                  alt=""
-                  className="h-[clamp(11rem,min(42vh,22rem),23.75rem)] w-full object-cover"
+                  src={siteImages.magazineAllViewHero}
+                  alt="Afrofuturist broadcast control room with KMT Dream in Public signage"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
-              ) : (
-                <div
-                  className="h-[clamp(11rem,min(42vh,22rem),23.75rem)] w-full"
-                  style={{
-                    backgroundColor: CHANNEL_PLACEHOLDER_BG[allViewHeroArticle.lane],
-                  }}
-                  aria-hidden
-                />
-              )}
+              </div>
             </div>
           </div>
         ) : null}
