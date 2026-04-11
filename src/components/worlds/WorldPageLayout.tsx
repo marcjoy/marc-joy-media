@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { sectionReveal } from '@/lib/motion';
@@ -8,7 +9,7 @@ type Props = {
   subhead: string;
   statusCategory: string;
   statusState: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function WorldPageLayout({
@@ -63,7 +64,7 @@ export function WorldPageLayout({
 
 type SectionProps = {
   title?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function WorldSection({ title, children }: SectionProps) {

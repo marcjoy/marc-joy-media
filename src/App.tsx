@@ -16,6 +16,7 @@ import Work from './pages/Work';
 import Music from './pages/Music';
 import About from './pages/About';
 import Magazine from './pages/Magazine';
+import ArticleDetail from './pages/ArticleDetail';
 import Shop from './pages/Shop';
 import Mars from './pages/Mars';
 import NotFound from './pages/NotFound';
@@ -45,6 +46,7 @@ function dataPageFromPath(pathname: string): string {
   if (parts.length > 1) {
     if (parts[0] === 'kemetopolis' && parts.length === 2) return 'kemetopolis';
     if (parts[0] === 'worlds') return 'world-detail';
+    if (parts[0] === 'magazine' && parts.length === 2) return 'magazine';
     return 'not-found';
   }
   const seg = parts[0];
@@ -87,6 +89,7 @@ function AnimatedRoutes() {
           <Route path="/music" element={<Music />} />
           <Route path="/about" element={<About />} />
           <Route path="/magazine" element={<Magazine />} />
+          <Route path="/magazine/:id" element={<ArticleDetail />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/mars" element={<Mars />} />
           <Route path="*" element={<NotFound />} />

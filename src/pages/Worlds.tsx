@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { siteImages } from '@/lib/images';
 import { worldsHubCards, type WorldsHubCard, type WorldsHubImageKey } from '@/data/worldsHub';
+import { WorldsMatrixBackground } from '@/components/worlds/WorldsMatrixBackground';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '@/lib/motion';
 
 const IMAGE_MAP: Record<WorldsHubImageKey, string> = {
@@ -97,9 +98,10 @@ export default function Worlds() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pb-32"
+      className="worlds-matrix-root relative pb-32"
     >
-      <div className="px-[clamp(1rem,5vw,2rem)] pt-48 md:px-24">
+      <WorldsMatrixBackground />
+      <div className="relative z-[1] px-[clamp(1rem,5vw,2rem)] pt-48 md:px-24">
         <motion.section
           className="mx-auto mb-20 max-w-7xl"
           initial={sectionReveal.initial}

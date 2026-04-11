@@ -81,7 +81,7 @@ export default function Navbar() {
           <NavLink to="/work" className={navLinkClass}>
             Work
           </NavLink>
-          <NavLink to="/magazine" className={navLinkClass}>
+          <NavLink to="/magazine" end={false} className={navLinkClass}>
             Magazine
           </NavLink>
           <a
@@ -154,7 +154,7 @@ export default function Navbar() {
             <NavLink to="/work" className={mobileNavLinkClass} onClick={closeMenu}>
               Work
             </NavLink>
-            <NavLink to="/magazine" className={mobileNavLinkClass} onClick={closeMenu}>
+            <NavLink to="/magazine" end={false} className={mobileNavLinkClass} onClick={closeMenu}>
               Magazine
             </NavLink>
             <a

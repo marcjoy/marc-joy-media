@@ -9,6 +9,7 @@ import type { KemetopolisSlug } from '@/data/kemetopolisCharacterDetails';
 import { kemetopolisCharacterBySlug } from '@/data/kemetopolisCharacterDetails';
 import { images, siteImages } from '../lib/images';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
+import { KemetopolisStarfield } from '@/components/kemetopolis/KemetopolisStarfield';
 
 const VINE_HEIGHTS_PX = [120, 180, 90, 150, 110] as const;
 
@@ -208,6 +209,8 @@ export default function Kemetopolis() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      <KemetopolisStarfield />
+      <div className="relative z-10">
       <section ref={heroRef} className="relative h-[155vh] overflow-hidden">
         <div className="sticky top-0 h-screen overflow-hidden">
           <motion.div
@@ -606,6 +609,7 @@ export default function Kemetopolis() {
           animation: kemetopolisSporePulse 3s ease-in-out infinite;
         }
       `}</style>
+      </div>
     </motion.div>
   );
 }

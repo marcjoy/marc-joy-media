@@ -1,0 +1,84 @@
+/**
+ * Kemetopolis starfield — technique from Uiverse.io by jaykdoe (parallax box-shadow stars).
+ * Scoped so #stars / #stars2 / #stars3 never collide globally. #title omitted (page has its own hero).
+ */
+
+.kemetopolis-starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.kemetopolis-starfield .kemetopolis-stars-container {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  box-shadow: var(--kss-shadow, none);
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer::after {
+  content: ' ';
+  position: absolute;
+  top: 2000px;
+  left: 0;
+  background: transparent;
+  box-shadow: var(--kss-shadow, none);
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer-1,
+.kemetopolis-starfield .kemetopolis-stars-layer-1::after {
+  width: 1px;
+  height: 1px;
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer-2,
+.kemetopolis-starfield .kemetopolis-stars-layer-2::after {
+  width: 2px;
+  height: 2px;
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer-3,
+.kemetopolis-starfield .kemetopolis-stars-layer-3::after {
+  width: 3px;
+  height: 3px;
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer-1 {
+  animation: kemetopolis-anim-star 50s linear infinite;
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer-2 {
+  animation: kemetopolis-anim-star 100s linear infinite;
+}
+
+.kemetopolis-starfield .kemetopolis-stars-layer-3 {
+  animation: kemetopolis-anim-star 150s linear infinite;
+}
+
+@keyframes kemetopolis-anim-star {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kemetopolis-starfield .kemetopolis-stars-layer-1,
+  .kemetopolis-starfield .kemetopolis-stars-layer-2,
+  .kemetopolis-starfield .kemetopolis-stars-layer-3 {
+    animation: none;
+  }
+}
