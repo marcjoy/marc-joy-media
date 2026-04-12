@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import type { MotionValue } from 'motion/react';
 import { useScroll, useTransform, motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import CinematicScrollytelling from '../components/CinematicScrollytelling';
+import HomeSequentialHero from '../components/HomeSequentialHero';
 import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
 import {
   ElfsightInstagramFeed,
@@ -90,8 +90,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Outside route fade wrapper so opacity:0 never hides the canvas or preload UI */}
-      <CinematicScrollytelling />
+      <HomeSequentialHero />
 
       <motion.div
         data-page="home"

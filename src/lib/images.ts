@@ -19,10 +19,15 @@ export const images = {
     heroPageFramesBase: `${R2}/hero/main-page-hero-scroll`,
     /** Site-wide social preview (index.html og/twitter); not used as Kemetopolis video poster */
     ogImage: `${R2}/hero/og-image.jpg`,
+    /** Home sequential hero — transparent logo PNG over loop video */
+    homeTitleOverlay: `${R2}/hero/logo.PNG`,
   },
 
   // ===== HERO VIDEOS =====
   heroVideo: {
+    /** Home: intro clip, then hands off to staticHomeHero */
+    introHero: `${R2}/hero/introhero.mp4`,
+    staticHomeHero: `${R2}/hero/statichomehero.mp4`,
     video1126: `${R2}/hero/hero-video-1126.mp4`,
     videoLatest: `${R2}/hero/hero-video-latest.mp4`,
     /** Kofi character page — Ancient Doorway / portal */
@@ -105,8 +110,10 @@ export const images = {
 
   // ===== MAGAZINE =====
   magazine: {
-    /** Magazine / Dream in Public — ALL view hero (lane strips below) */
-    allViewHero: `${R2}/Dream-in-Public/Afrofuturist_broadcast_control_202604102358.jpeg`,
+    /** Magazine / Dream in Public — ALL view hero video (lane strips below) */
+    allViewHeroVideo: `${R2}/Dream-in-Public/newsroom.mp4`,
+    /** Poster still while video loads / first frame hint */
+    allViewHeroPoster: `${R2}/Dream-in-Public/Afrofuturist_broadcast_control_202604102358.jpeg`,
   },
 
   // ===== MUSIC =====
@@ -199,5 +206,6 @@ export const siteImages = {
   aboutPortrait: images.about.portraitV1,
 
   // Magazine — Dream in Public
-  magazineAllViewHero: images.magazine.allViewHero,
+  magazineAllViewHeroVideo: images.magazine.allViewHeroVideo,
+  magazineAllViewHeroPoster: images.magazine.allViewHeroPoster,
 } as const;

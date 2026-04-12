@@ -103,13 +103,16 @@ export default function Magazine() {
           <div className="mb-9 px-6">
             <div className="overflow-hidden rounded-[12px] border-[0.5px] border-white/[0.08]">
               <div className="relative aspect-[16/10] w-full sm:aspect-[2.35/1]">
-                <img
-                  src={siteImages.magazineAllViewHero}
-                  alt="Afrofuturist broadcast control room with KMT Dream in Public signage"
+                <video
                   className="absolute inset-0 h-full w-full object-cover object-center"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
+                  src={siteImages.magazineAllViewHeroVideo}
+                  poster={siteImages.magazineAllViewHeroPoster}
+                  muted
+                  playsInline
+                  loop
+                  autoPlay
+                  preload="metadata"
+                  aria-label="Afrofuturist newsroom — Dream in Public broadcast control"
                 />
               </div>
             </div>
