@@ -69,9 +69,6 @@ export default function Navbar() {
           <NavLink to="/worlds" className={navLinkClass}>
             Worlds
           </NavLink>
-          <NavLink to="/kemetopolis" className={navLinkClass}>
-            Kemetopolis
-          </NavLink>
           <NavLink to="/music" className={navLinkClass}>
             Music
           </NavLink>
@@ -141,9 +138,6 @@ export default function Navbar() {
           <nav className="flex flex-col" aria-label="Primary">
             <NavLink to="/worlds" className={mobileNavLinkClass} onClick={closeMenu}>
               Worlds
-            </NavLink>
-            <NavLink to="/kemetopolis" className={mobileNavLinkClass} onClick={closeMenu}>
-              Kemetopolis
             </NavLink>
             <NavLink to="/music" className={mobileNavLinkClass} onClick={closeMenu}>
               Music
