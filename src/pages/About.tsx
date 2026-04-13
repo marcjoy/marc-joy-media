@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
@@ -6,6 +6,7 @@ import { MapPin } from 'lucide-react';
 import { siteImages } from '../lib/images';
 import { streamingLinks } from '../data/sonicCosmos';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
+import AnimatedShaderBackground from '@/components/ui/animated-shader-background';
 
 const FORMSUBMIT_EMAIL = 'marcjoy@marcjoy.com';
 
@@ -42,12 +43,14 @@ export default function About() {
   }, [location.pathname, location.hash]);
 
   return (
-    <motion.div
+    <Fragment>
+      <AnimatedShaderBackground withScrim />
+      <motion.div
       data-page="about"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="mx-auto max-w-7xl pb-[max(5rem,env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] pt-24 sm:pl-[max(1.5rem,env(safe-area-inset-left,0px))] sm:pr-[max(1.5rem,env(safe-area-inset-right,0px))] sm:pt-28 md:pb-32 md:pt-36 lg:pt-32"
+      className="relative z-10 mx-auto max-w-7xl pb-[max(5rem,env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] pt-24 sm:pl-[max(1.5rem,env(safe-area-inset-left,0px))] sm:pr-[max(1.5rem,env(safe-area-inset-right,0px))] sm:pt-28 md:pb-32 md:pt-36 lg:pt-32"
     >
       <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-16">
         <motion.section
@@ -293,5 +296,6 @@ export default function About() {
         </div>
       </section>
     </motion.div>
+    </Fragment>
   );
 }

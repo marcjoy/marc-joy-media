@@ -1,7 +1,9 @@
+import { Fragment } from 'react';
 import { motion } from 'motion/react';
 import { ExternalLink } from 'lucide-react';
 import { ElfsightAppointmentBooking } from '../components/ElfsightAppointmentBooking';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
+import TurbulentFlowBackground from '@/components/ui/turbulent-flow';
 
 type ClientProject = {
   label: string;
@@ -105,12 +107,14 @@ function ClientCard({ project }: { project: ClientProject }) {
 
 export default function Work() {
   return (
-    <motion.div
+    <Fragment>
+      <TurbulentFlowBackground withScrim />
+      <motion.div
       data-page="work"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pb-32"
+      className="relative z-10 pb-32"
     >
       <div className="mx-auto max-w-3xl px-8 pt-48 md:max-w-4xl lg:max-w-5xl">
         <motion.section
@@ -156,5 +160,6 @@ export default function Work() {
 
       <ElfsightAppointmentBooking />
     </motion.div>
+    </Fragment>
   );
 }
