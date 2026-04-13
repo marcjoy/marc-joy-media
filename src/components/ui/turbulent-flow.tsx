@@ -31,6 +31,7 @@ export default function TurbulentFlowBackground({ className, withScrim = false }
     const h = window.innerHeight;
     renderer.setSize(w, h);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio ?? 1, 2));
+    renderer.domElement.style.pointerEvents = 'none';
     mount.appendChild(renderer.domElement);
 
     const vertexShader = `

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useScroll, useTransform, motion } from 'motion/react';
 import { Music as MusicIcon } from 'lucide-react';
+import InteractiveNeuralVortexBackground from '@/components/ui/interactive-neural-vortex-background';
 import { siteImages } from '../lib/images';
 import { streamingLinks } from '../data/sonicCosmos';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
@@ -31,7 +32,7 @@ export default function Music() {
       exit={{ opacity: 0 }}
       className="relative z-10 mx-auto max-w-7xl px-[clamp(1rem,5vw,2rem)] pt-40 pb-24 md:pt-36 lg:pt-32"
     >
-      <div className="fixed inset-0 z-0 music-pulse-bg pointer-events-none" aria-hidden />
+      <InteractiveNeuralVortexBackground withScrim />
       <div className="relative z-10">
         <motion.section
           initial={sectionReveal.initial}

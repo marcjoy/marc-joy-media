@@ -83,7 +83,7 @@ export default function HomeSequentialHero() {
         src={images.hero.homeTitleOverlay}
         alt=""
         className={`pointer-events-none absolute left-1/2 top-1/2 z-[3] h-auto w-auto max-h-[min(44vh,28rem)] max-w-[min(42vw,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 object-contain object-center select-none transition-opacity duration-[800ms] ease-in sm:max-h-[min(46vh,32rem)] sm:max-w-[38vw] md:max-w-[34vw] lg:max-w-[30vw] ${
-          overlayVisible ? 'opacity-100' : 'opacity-0'
+          overlayVisible ? 'opacity-80' : 'opacity-0'
         }`}
         draggable={false}
       />

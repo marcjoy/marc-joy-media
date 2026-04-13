@@ -172,10 +172,11 @@ export const siteImages = {
 
   // Property cards on home page
   propertyKemetopolis: images.properties.kemetopolisCard,
-  propertyNeverOneMonth: images.properties.kemetopolisCoin,
+  // TODO: MarcJoy to upload dedicated NOM and ST thumbnail images to R2
+  propertyNeverOneMonth: images.properties.fotorProperty,
   propertyMarsAcademy: images.properties.marsAcademy,
   propertyNWBP: images.properties.nwbpImage,
-  propertyScatteredThrones: images.properties.skaterGirl,
+  propertyScatteredThrones: images.properties.propertyUnknown01,
 
   // Kemetopolis page characters
   charKofi: images.characters.kofi,

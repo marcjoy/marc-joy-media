@@ -3,7 +3,7 @@ import { streamingLinks } from '../data/sonicCosmos';
 
 export default function Footer() {
   return (
-    <footer className="mt-auto w-full shrink-0 border-t border-white/10 bg-surface-container-lowest px-[clamp(1rem,4vw,2rem)] pt-10 pb-[max(2.5rem,calc(2.5rem+env(safe-area-inset-bottom,0px)))] md:py-12 md:pb-[max(3rem,calc(3rem+env(safe-area-inset-bottom,0px)))]">
+    <footer className="relative z-10 mt-auto w-full shrink-0 border-t border-white/10 bg-surface-container-lowest px-[clamp(1rem,4vw,2rem)] pt-10 pb-[max(2.5rem,calc(2.5rem+env(safe-area-inset-bottom,0px)))] md:py-12 md:pb-[max(3rem,calc(3rem+env(safe-area-inset-bottom,0px)))]">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 w-full">
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="text-lg font-bold text-on-surface font-headline uppercase tracking-tight">MARC JOY MEDIA</div>

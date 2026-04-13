@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { cn } from '../lib/utils';
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -20,8 +20,10 @@ const mobileExternalClass =
   'font-headline font-bold tracking-tighter uppercase transition-all duration-300 text-lg py-3 border-b border-white/10 block text-on-surface opacity-90 hover:opacity-100';
 
 export default function Navbar() {
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const solidNavBar = scrolled || location.pathname === '/work';
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
@@ -56,7 +58,7 @@ export default function Navbar() {
           'pt-[max(1.5rem,env(safe-area-inset-top,0px))]',
           'pl-[max(clamp(1rem,4vw,2rem),env(safe-area-inset-left,0px))]',
           'pr-[max(clamp(1rem,4vw,2rem),env(safe-area-inset-right,0px))]',
-          scrolled ? 'bg-background/90 backdrop-blur-md' : 'bg-transparent'
+          solidNavBar ? 'bg-background/90 backdrop-blur-md' : 'bg-transparent'
         )}
       >
         <Link

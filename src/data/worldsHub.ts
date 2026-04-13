@@ -100,7 +100,7 @@ export const worldsHubCards: WorldsHubCard[] = [
     title: 'Dream in Public',
     description:
       'The public-facing newsroom and creative platform of Marc Joy Media. Documenting, distributing, and amplifying the full MJM ecosystem.',
-    to: '/worlds/dream-in-public',
+    to: '/magazine',
     tier: 'development',
     variant: 'placeholder',
     accent: 'amber',

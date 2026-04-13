@@ -6,7 +6,7 @@ import { MapPin } from 'lucide-react';
 import { siteImages } from '../lib/images';
 import { streamingLinks } from '../data/sonicCosmos';
 import { sectionReveal, staggerCardVariants, staggerContainerVariants, staggerViewport } from '../lib/motion';
-import AnimatedShaderBackground from '@/components/ui/animated-shader-background';
+import { Starfield } from '@/components/ui/starfield-1';
 
 const FORMSUBMIT_EMAIL = 'marcjoy@marcjoy.com';
 
@@ -44,7 +44,16 @@ export default function About() {
 
   return (
     <Fragment>
-      <AnimatedShaderBackground withScrim />
+      <Starfield
+        mouseAdjust
+        withScrim
+        starColor="rgba(232, 213, 176, 0.78)"
+        bgColor="rgba(15, 14, 18, 0.98)"
+        opacity={0.12}
+        speed={0.38}
+        quantity={520}
+        easing={22}
+      />
       <motion.div
       data-page="about"
       initial={{ opacity: 0 }}
